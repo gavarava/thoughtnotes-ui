@@ -1,0 +1,30 @@
+<div class="daynote-item">
+    <div class="daynote-header">
+      <h2>{{ daynote.title }}</h2>
+      <span class="daynote-category">{{ daynote.category }}</span>
+      <span class="daynote-tag">{{ daynote.tag }}</span>
+    </div>
+    
+    <div class="daynote-details">
+      <div class="daynote-description" [innerHTML]="daynote.description"></div>
+      
+      <div class="daynote-metadata">
+        <div class="daynote-date">
+          <span class="label">Date:</span>
+          <span>{{ daynote.date }}</span>
+        </div>
+        
+        <div class="daynote-mood">
+          <span class="label">Status:</span>
+          <span>{{ daynote.mood }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="daynote-footer">
+      <div><button mat-icon-button class="copy-btn" (click)="addToFavourites(daynote.UUID)"><mat-icon>star</mat-icon></button>
+      <button mat-icon-button class="copy-btn" (click)="addToFavourites(daynote.UUID)"><mat-icon>schedule</mat-icon></button></div>
+      <small>Created: {{ daynote.timestamp | date:'medium' }}</small>
+    </div>
+    
+  </div>

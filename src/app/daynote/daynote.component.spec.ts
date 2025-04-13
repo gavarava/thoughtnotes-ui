@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppframeComponent } from './appframe.component';
+import { DaynoteComponent } from './daynote.component';
 
-describe('AppframeComponent', () => {
-  let component: AppframeComponent;
-  let fixture: ComponentFixture<AppframeComponent>;
+describe('DaynoteComponent', () => {
+  let component: DaynoteComponent;
+  let fixture: ComponentFixture<DaynoteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppframeComponent]
+      imports: [DaynoteComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AppframeComponent);
+    fixture = TestBed.createComponent(DaynoteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

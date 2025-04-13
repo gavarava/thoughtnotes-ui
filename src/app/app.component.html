@@ -1,1 +1,28 @@
-<app-frame></app-frame>
+<mat-toolbar class="main-header">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="onMenuClick()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="thought-notes"><mat-icon>cloud_upload</mat-icon>&nbsp;Thought Notes</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+  <mat-sidenav-container class="sidenav-menu">
+    <mat-sidenav mode="side" [(opened)]="isSideOpen" class="sidenav-menu side">Start</mat-sidenav>
+    <mat-sidenav-content>
+      <!--*ngFor="let eachDayNote of dayNotesList$ | async;"-->
+      @if (dayNotesList$ | async; as dayNotesCollection) {  <!--Benefits of using async pipe is that the Observable is unsubscribed automatically when the component is destroyed-->
+        @for (eachDayNote of dayNotesCollection; track eachDayNote.UUID) {
+          <app-daynote [daynote]="eachDayNote"></app-daynote>
+        }
+      }
+      
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
