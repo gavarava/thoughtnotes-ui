@@ -15,13 +15,13 @@
   <mat-sidenav-container class="sidenav-menu">
     <mat-sidenav mode="side" [(opened)]="isSideOpen" class="sidenav-menu side">Start</mat-sidenav>
     <mat-sidenav-content>
+      <app-focus-header></app-focus-header>
       <!--*ngFor="let eachDayNote of dayNotesList$ | async;"-->
       @if (dayNotesList$ | async; as dayNotesCollection) {  <!--Benefits of using async pipe is that the Observable is unsubscribed automatically when the component is destroyed-->
         @for (eachDayNote of dayNotesCollection; track eachDayNote.UUID) {
           <app-daynote [daynote]="eachDayNote"></app-daynote>
         }
       }
-      
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

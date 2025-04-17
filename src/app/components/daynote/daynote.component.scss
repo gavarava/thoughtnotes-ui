@@ -1,0 +1,123 @@
+.daynote-item {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  transition: box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &:hover {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .daynote-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0;
+      color: #333;
+    }
+
+    .daynote-category,
+    .daynote-tag {
+      width: fit-content;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.15rem 0.5rem;
+      border-radius: 1rem;
+      display: inline-block;
+      margin-right: 0.35rem;
+      border: 1px solid rgba(235, 235, 235, 0.8);
+      transition: all 0.15s ease;
+      
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+    
+    .daynote-category {
+      color: #4a6da7;
+      background-color: #eef2f9;
+      
+      &:hover {
+        background-color: #e5ebf5;
+      }
+    }
+    
+    .daynote-tag {
+      color: #6b8a64;
+      background-color: #f2f7f1;
+      
+      &:hover {
+        background-color: #e8f0e6;
+      }
+    }
+  }
+
+  .daynote-details {
+    .daynote-description {
+      font-size: 0.85rem;
+      color: #444;
+      line-height: 1.4;
+    }
+
+    .daynote-metadata {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+
+      .daynote-date,
+      .daynote-mood {
+        display: flex;
+        gap: 0.25rem;
+        font-size: 0.75rem;
+        color: #555;
+
+        .label {
+          font-weight: 600;
+          color: #333;
+        }
+      }
+    }
+  }
+
+  .daynote-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    color: #888;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 0.5rem;
+    margin-top: 0.25rem;
+    
+    .copy-btn {
+      background-color: #f5f5f5;
+      border: none;
+      padding: 0.15rem 0.4rem;
+      margin-left: 0.25rem;
+      border-radius: 0.25rem;
+      font-size: 0.65rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #555;
+  
+      &:hover {
+        background-color: #e0e0e0;
+        color: #000;
+      }
+  
+      &:active {
+        transform: scale(0.97);
+      }
+    }
+  }
+}

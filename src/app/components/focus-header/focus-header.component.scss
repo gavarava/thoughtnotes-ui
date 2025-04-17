@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+
+/* focused-header.component.css */
+.focus-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: map-get(mat.$azure-palette, 100);
+  color: map-get(mat.$azure-palette, 25);
+  padding: 10px 20px;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 14px;
+}
+
+.info-item {
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.value {
+  color: #007bff;
+}
+
+@media (max-width: 768px) {
+  .focus-header {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .info-item {
+    margin: 5px 0;
+  }
+}
