@@ -1,15 +1,17 @@
 <mat-toolbar class="focus-header">
   <div class="focus-header">
+    <ng-container *ngIf="context.numberOfNotesInFocus$ | async as numberOfNotesInFocus">
+      <div class="info-item"><span class="label">Looking at {{ numberOfNotesInFocus }} notes for the last {{ context.focusScopeInDays }} days</span></div>
+    </ng-container>
     <div class="info-item">
-      <span class="label">Date:</span>
-      <span class="value">{{ currentDate | date:'fullDate' }}</span>
+      <span class="label">Its&nbsp;<span class="value">{{ currentDate | date:'fullDate' }}</span> today.</span> 
     </div>
     <div class="info-item">
-      <span class="label">Time:</span>
-      <span class="value">{{ currentDate | date:'HH:mm:ss' }}</span>
+      <span class="label"><span class="value">{{ currentDate | date:'HH:mm:ss' }}</span></span>
+      
     </div>
     <div class="info-item">
-      <span class="label">Week:</span>
+      <span class="label">Week</span>
       <span class="value">{{ currentWeek }} of {{ currentDate | date:'yyyy' }}</span>
     </div>
     <div class="info-item">

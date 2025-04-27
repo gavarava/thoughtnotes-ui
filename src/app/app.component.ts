@@ -7,9 +7,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { DayNote } from './model/daynote';
 import { DaynoteComponent } from './components/daynote/daynote.component';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { DaynotesService } from './services/daynotes.service';
 import { FocusHeaderComponent } from "./components/focus-header/focus-header.component";
+import { FocusContext } from './model/focus-context';
 
 
 @Component({
@@ -21,6 +22,7 @@ import { FocusHeaderComponent } from "./components/focus-header/focus-header.com
 export class AppComponent implements OnInit {
 
   dayNotesList$!: Observable<DayNote[]>;
+  context!: FocusContext;
   
   isSideOpen = false;
 
@@ -28,9 +30,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.dayNotesList$ = this.daynotesService.loadDayNotes();
+    // Ideal to setup a service to gather the context
+    this.context = {
+      numberOfNotesInFocus$: this.dayNotesList$.pipe(map(notes => notes.length)),
+      focusScopeInDays: 30
+    };
   }
 
   onMenuClick() {
     this.isSideOpen = !this.isSideOpen;
   }
+
 }

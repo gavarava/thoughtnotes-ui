@@ -1,0 +1,15 @@
+GET http://localhost:9000/api/daynotes
+
+###
+## Save a Note
+POST http://localhost:9000/api/daynotes
+Content-Type: application/json
+
+{
+  "category": "Mental Health",
+  "tag": "Therapi",
+  "title": "Therapi session on Mindler",
+  "description": "<b>Completed a session with Work-Life-Balance coach Viveka.</b>",
+  "date": "2025-04-29",
+  "mood": "done"
+}

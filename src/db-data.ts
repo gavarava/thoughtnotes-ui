@@ -1,53 +1,293 @@
 export const DAYNOTESLIST: any =
-    [
-        {
-          "UUID": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-          "timestamp": 1712385803000,
-          "category": "Personal",
-          "tag": "Groceries",
-          "title": "Buy groceries for the week",
-          "description": "<b>Remember to buy milk, eggs, bread, cheese, and some vegetables. Check if we need any fruits as well.</b>",
-          "date": "2025-04-06",
-          "mood": "todo"
-        },
-        {
-          "UUID": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
-          "timestamp": 1712385803000,
-          "category": "Work",
-          "tag": "Meeting",
-          "title": "Project Kick-off Meeting",
-          "description": "<b>Attended the project kick-off meeting with the team. Discussed the project scope, timelines, and initial tasks. Need to follow up with an email summarizing the key decisions.</b>",
-          "date": "2025-04-05",
-          "mood": "done"
-        },
-        {
-          "UUID": "01234567-89ab-cdef-0123-456789abcdef01",
-          "timestamp": 1712385803000,
-          "category": "Fitness",
-          "tag": "Workout",
-          "title": "Evening Run",
-          "description": "<b> планирую пробежку на 5 км в парке после ужина. Нужно не забыть надеть удобную обувь и взять воду.</b>",
-          "date": "2025-04-06",
-          "mood": "todo"
-        },
-        {
-          "UUID": "bcdefa01-2345-6789-abcd-ef0123456789",
-          "timestamp": 1712385803000,
-          "category": "Personal",
-          "tag": "Reading",
-          "title": "Finished Chapter 3",
-          "description": "<b>Finally finished reading Chapter 3 of 'The Great Novel'. The plot is getting really interesting. Made some notes on the key characters and events.</b>",
-          "date": "2025-04-05",
-          "mood": "done"
-        },
-        {
-          "UUID": "98765432-10fe-dcba-9876-543210fedcba",
-          "timestamp": 1712385803000,
-          "category": "Work",
-          "tag": "Coding",
-          "title": "Implement User Authentication",
-          "description": "<b>Need to start working on implementing the user authentication module. This involves setting up the database schema, writing the API endpoints, and testing the functionality thoroughly.</b>",
-          "date": "2025-04-07",
-          "mood": "todo"
-        }
-      ]
+[
+    {
+      "UUID": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      "timestamp": 1712030400000,
+      "category": "Work",
+      "tag": "Meeting",
+      "title": "Quarterly Planning Session",
+      "description": "<b>Attended the quarterly planning session with leadership. Discussed Q2 objectives and resource allocation. Need to prepare department goals by next week.</b>",
+      "date": "2025-04-01",
+      "mood": "done"
+    },
+    {
+      "UUID": "b2c3d4e5-f6a1-8901-2345-67890abcdef1",
+      "timestamp": 1712034000000,
+      "category": "Personal",
+      "tag": "Health",
+      "title": "Annual Physical Checkup",
+      "description": "<b>Had my annual physical today. All vitals look good. Doctor recommended increasing daily water intake and continuing exercise routine.</b>",
+      "date": "2025-04-01",
+      "mood": "done"
+    },
+    {
+      "UUID": "c3d4e5f6-a1b2-9012-3456-7890abcdef12",
+      "timestamp": 1712116800000,
+      "category": "Personal",
+      "tag": "Finance",
+      "title": "Review Monthly Budget",
+      "description": "<b>Need to review March expenses and set up April budget. Focus on reducing dining out expenses and increasing savings rate.</b>",
+      "date": "2025-04-02",
+      "mood": "todo"
+    },
+    {
+      "UUID": "d4e5f6a1-b2c3-0123-4567-890abcdef123",
+      "timestamp": 1712289600000,
+      "category": "Fitness",
+      "tag": "Workout",
+      "title": "Morning Yoga Session",
+      "description": "<b>Completed 45-minute vinyasa flow session. Focused on hip openers and shoulder stretches. Feeling more flexible already.</b>",
+      "date": "2025-04-04",
+      "mood": "done"
+    },
+    {
+      "UUID": "e5f6a1b2-c3d4-1234-5678-90abcdef1234",
+      "timestamp": 1712376000000,
+      "category": "Work",
+      "tag": "Project",
+      "title": "Database Migration Planning",
+      "description": "<b>Started planning for the upcoming database migration. Need to identify potential risks and create a rollback strategy.</b>",
+      "date": "2025-04-05",
+      "mood": "todo"
+    },
+    {
+      "UUID": "f6a1b2c3-d4e5-2345-6789-0abcdef12345",
+      "timestamp": 1712376300000,
+      "category": "Personal",
+      "tag": "Family",
+      "title": "Call Mom",
+      "description": "<b>Need to call Mom to wish her happy birthday and finalize plans for next weekend's visit.</b>",
+      "date": "2025-04-05",
+      "mood": "todo"
+    },
+    {
+      "UUID": "a1b2c3d4-e5f6-3456-7890-abcdef123456",
+      "timestamp": 1712462400000,
+      "category": "Personal",
+      "tag": "Groceries",
+      "title": "Weekly Grocery Shopping",
+      "description": "<b>Bought fresh produce, proteins, and household essentials. Tried the new organic market on Main Street - great selection of local products.</b>",
+      "date": "2025-04-06",
+      "mood": "done"
+    },
+    {
+      "UUID": "b2c3d4e5-f6a1-4567-8901-bcdef1234567",
+      "timestamp": 1712462700000,
+      "category": "Fitness",
+      "tag": "Workout",
+      "title": "Evening Run",
+      "description": "<b>Completed 5km run at the park. Average pace was 5:30 min/km. Need to work on hill segments.</b>",
+      "date": "2025-04-06",
+      "mood": "done"
+    },
+    {
+      "UUID": "c3d4e5f6-a1b2-5678-9012-cdef12345678",
+      "timestamp": 1712463000000,
+      "category": "Work",
+      "tag": "Learning",
+      "title": "Complete Online Course",
+      "description": "<b>Started the advanced data analysis course. Completed first two modules. Need to finish the assignments before next weekend.</b>",
+      "date": "2025-04-06",
+      "mood": "todo"
+    },
+    {
+      "UUID": "d4e5f6a1-b2c3-6789-0123-def123456789",
+      "timestamp": 1712721600000,
+      "category": "Work",
+      "tag": "Meeting",
+      "title": "Client Presentation",
+      "description": "<b>Gave quarterly results presentation to client. Feedback was positive. They requested additional insights on user engagement metrics.</b>",
+      "date": "2025-04-09",
+      "mood": "done"
+    },
+    {
+      "UUID": "e5f6a1b2-c3d4-7890-1234-ef12345678901",
+      "timestamp": 1712808000000,
+      "category": "Personal",
+      "tag": "Home",
+      "title": "HVAC Maintenance",
+      "description": "<b>Technician coming between 2-4pm to perform seasonal maintenance on the HVAC system. Remember to change air filters.</b>",
+      "date": "2025-04-10",
+      "mood": "todo"
+    },
+    {
+      "UUID": "f6a1b2c3-d4e5-8901-2345-f123456789012",
+      "timestamp": 1712980800000,
+      "category": "Fitness",
+      "tag": "Workout",
+      "title": "Weight Training Session",
+      "description": "<b>Completed upper body workout. Increased weights on bench press and rows. Need to focus on better form for shoulder exercises.</b>",
+      "date": "2025-04-12",
+      "mood": "done"
+    },
+    {
+      "UUID": "a1b2c3d4-e5f6-9012-3456-123456789012a",
+      "timestamp": 1713067200000,
+      "category": "Personal",
+      "tag": "Reading",
+      "title": "Book Club Meeting",
+      "description": "<b>Attended monthly book club discussion on 'The Invisible Life of Addie LaRue'. Great conversation about themes of memory and identity.</b>",
+      "date": "2025-04-13",
+      "mood": "done"
+    },
+    {
+      "UUID": "b2c3d4e5-f6a1-0123-4567-23456789012ab",
+      "timestamp": 1713153600000,
+      "category": "Work",
+      "tag": "Project",
+      "title": "Frontend Bug Fixes",
+      "description": "<b>Addressed critical UI issues on the dashboard. Fixed responsive layout problems and optimized loading performance.</b>",
+      "date": "2025-04-14",
+      "mood": "done"
+    },
+    {
+      "UUID": "c3d4e5f6-a1b2-1234-5678-3456789012abc",
+      "timestamp": 1713154200000,
+      "category": "Work",
+      "tag": "Admin",
+      "title": "Submit Expense Reports",
+      "description": "<b>Need to submit expense reports for the client visit last week. Don't forget to include transportation receipts.</b>",
+      "date": "2025-04-14",
+      "mood": "todo"
+    },
+    {
+      "UUID": "d4e5f6a1-b2c3-2345-6789-456789012abcd",
+      "timestamp": 1713240000000,
+      "category": "Personal",
+      "tag": "Finance",
+      "title": "Tax Preparation",
+      "description": "<b>Gathered all necessary documents for tax filing. Need to schedule appointment with accountant.</b>",
+      "date": "2025-04-15",
+      "mood": "todo"
+    },
+    {
+      "UUID": "e5f6a1b2-c3d4-3456-7890-56789012abcde",
+      "timestamp": 1713326400000,
+      "category": "Work",
+      "tag": "Meeting",
+      "title": "Team Retrospective",
+      "description": "<b>Led retrospective for Q1 projects. Team identified communication as an area for improvement. Will implement daily stand-ups starting next week.</b>",
+      "date": "2025-04-16",
+      "mood": "done"
+    },
+    {
+      "UUID": "f6a1b2c3-d4e5-4567-8901-6789012abcdef",
+      "timestamp": 1713499200000,
+      "category": "Personal",
+      "tag": "Social",
+      "title": "Dinner with Friends",
+      "description": "<b>Met up with college friends at the new Italian restaurant downtown. Great catching up and food was excellent.</b>",
+      "date": "2025-04-18",
+      "mood": "done"
+    },
+    {
+      "UUID": "a1b2c3d4-e5f6-5678-9012-789012abcdef0",
+      "timestamp": 1713585600000,
+      "category": "Fitness",
+      "tag": "Workout",
+      "title": "Hiking Trip",
+      "description": "<b>Completed the 8-mile trail at Cedar Ridge. Beautiful spring weather and wildflowers starting to bloom.</b>",
+      "date": "2025-04-19",
+      "mood": "done"
+    },
+    {
+      "UUID": "b2c3d4e5-f6a1-6789-0123-89012abcdef01",
+      "timestamp": 1713672000000,
+      "category": "Personal",
+      "tag": "Learning",
+      "title": "Language Practice",
+      "description": "<b>Completed daily Spanish lesson on the app. Getting better at past tense conjugation. Need to practice more conversation.</b>",
+      "date": "2025-04-20",
+      "mood": "done"
+    },
+    {
+      "UUID": "c3d4e5f6-a1b2-7890-1234-9012abcdef012",
+      "timestamp": 1713672600000,
+      "category": "Personal",
+      "tag": "Home",
+      "title": "Garden Planning",
+      "description": "<b>Sketched layout for vegetable garden. Need to buy seeds for tomatoes, peppers, and herbs next weekend.</b>",
+      "date": "2025-04-20",
+      "mood": "todo"
+    },
+    {
+      "UUID": "d4e5f6a1-b2c3-8901-2345-012abcdef0123",
+      "timestamp": 1713844800000,
+      "category": "Work",
+      "tag": "Project",
+      "title": "API Documentation",
+      "description": "<b>Updated API documentation with new endpoints and examples. Added troubleshooting section based on recent support tickets.</b>",
+      "date": "2025-04-22",
+      "mood": "done"
+    },
+    {
+      "UUID": "e5f6a1b2-c3d4-9012-3456-12abcdef01234",
+      "timestamp": 1713845400000,
+      "category": "Work",
+      "tag": "Learning",
+      "title": "Technical Webinar",
+      "description": "<b>Attended webinar on microservices architecture. Good insights on service discovery and fault tolerance patterns.</b>",
+      "date": "2025-04-22",
+      "mood": "done"
+    },
+    {
+      "UUID": "f6a1b2c3-d4e5-0123-4567-2abcdef012345",
+      "timestamp": 1714017600000,
+      "category": "Personal",
+      "tag": "Health",
+      "title": "Dentist Appointment",
+      "description": "<b>Regular cleaning and check-up at 2:30pm. Remember to bring insurance card.</b>",
+      "date": "2025-04-24",
+      "mood": "todo"
+    },
+    {
+      "UUID": "a1b2c3d4-e5f6-1234-5678-3abcdef012345",
+      "timestamp": 1714190400000,
+      "category": "Work",
+      "tag": "Admin",
+      "title": "Monthly Report Preparation",
+      "description": "<b>Started gathering metrics for the monthly performance report. Need to get input from the analytics team on conversion trends.</b>",
+      "date": "2025-04-26",
+      "mood": "todo"
+    },
+    {
+      "UUID": "b2c3d4e5-f6a1-2345-6789-4abcdef012345",
+      "timestamp": 1714276800000,
+      "category": "Personal",
+      "tag": "Family",
+      "title": "Sunday Brunch",
+      "description": "<b>Hosted family brunch at home. Tried new French toast recipe that was a hit. Will add to regular rotation.</b>",
+      "date": "2025-04-27",
+      "mood": "done"
+    },
+    {
+      "UUID": "c3d4e5f6-a1b2-3456-7890-5abcdef012345",
+      "timestamp": 1714363200000,
+      "category": "Work",
+      "tag": "Meeting",
+      "title": "Strategy Planning",
+      "description": "<b>Met with marketing team to align on Q2 campaigns. Decided to focus on retention initiatives and community building.</b>",
+      "date": "2025-04-28",
+      "mood": "done"
+    },
+    {
+      "UUID": "d4e5f6a1-b2c3-4567-8901-6abcdef012345",
+      "timestamp": 1714363800000,
+      "category": "Work",
+      "tag": "Coding",
+      "title": "Refactor Authentication Module",
+      "description": "<b>Started refactoring the authentication module to use the new security framework. Estimated completion time is 3 days.</b>",
+      "date": "2025-04-28",
+      "mood": "todo"
+    },
+    {
+      "UUID": "e5f6a1b2-c3d4-5678-9012-7abcdef012345",
+      "timestamp": 1714449600000,
+      "category": "Fitness",
+      "tag": "Workout",
+      "title": "Swimming Session",
+      "description": "<b>Completed 30 laps at the community pool. Working on improving breathing technique for freestyle.</b>",
+      "date": "2025-04-29",
+      "mood": "done"
+    }
+  ]

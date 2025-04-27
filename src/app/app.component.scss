@@ -3,7 +3,7 @@
 .example-spacer {
     flex: 1 1 auto;
   }
-  
+
   .thought-notes {
     display: inline-block;
     padding: 8px 16px;
@@ -13,10 +13,10 @@
     //border-right: 4px solid #2196f3;
     font-weight: 650;
     font-size: 2.1rem;
-    
+
     border-radius: 4px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  
+
     // Optional hover effect
     &:hover {
       background-color: map-get(mat.$azure-palette, 90);
@@ -28,27 +28,106 @@
     padding: 20px 15px;
 }
 
+.sidebar-menu {
+  background: map-get(mat.$azure-palette, 70);
+}
+
 .main-footer {
     // TODO: Add styles for the footer
     background: map-get(mat.$azure-palette, 70);
     padding: 20px 15px;
 }
 
-.sidenav-menu {
-    width: auto;
-    height: 90%;
-    margin: 10px;
-    border: 1px solid #555;
-    /* The background property is added to clearly distinguish the borders between drawer and main
-       content */
-    background: #eee;
+/* Styles for buttons inside mat-sidenav */
+.mat-sidenav .sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
 
-  }
+/* Button container */
+.mat-sidenav .sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+}
 
-  .sidenav-menu.side {
-    background-color: map-get(mat.$azure-palette, 90);
-    width: 30%;
-    height: 100%;
-    overflow: auto;
-    border: none;
-  }
+/* Standard button styling */
+.mat-sidenav .sidebar-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 4px;
+  border: none;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: left;
+  outline: none;
+  width: 100%;
+}
+
+/* Icon styling - compatible with mat-icon */
+.mat-sidenav .sidebar-button .mat-icon {
+  margin-right: 16px;
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover state - using Material Design states */
+.mat-sidenav .sidebar-button:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Active state */
+.mat-sidenav .sidebar-button.active {
+  background-color: map-get(mat.$azure-palette, 100);
+  color: map-get(mat.$azure-palette, 25);
+}
+
+/* Button groups with heading */
+.mat-sidenav .button-group {
+  margin-bottom: 8px;
+}
+
+.mat-sidenav .button-group-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: map-get(mat.$azure-palette, 25);
+  background-color: map-get(mat.$azure-palette, 100);
+  margin: 16px 16px 8px;
+  font-weight: 500;
+}
+
+/* Optional: different styling for primary actions */
+.mat-sidenav .sidebar-button.primary {
+  color: #1976d2;
+}
+
+/* Responsive adjustments for collapsed sidebar */
+.mat-sidenav.collapsed {
+  width: 56px;
+}
+
+.mat-sidenav.collapsed .sidebar-button {
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.mat-sidenav.collapsed .sidebar-button .mat-icon {
+  margin-right: 0;
+}
+
+.mat-sidenav.collapsed .sidebar-button span.text,
+.mat-sidenav.collapsed .button-group-title {
+  display: none;
+}
