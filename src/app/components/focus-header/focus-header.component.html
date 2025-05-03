@@ -1,14 +1,14 @@
 <mat-toolbar class="focus-header">
   <div class="focus-header">
     <ng-container *ngIf="context.numberOfNotesInFocus$ | async as numberOfNotesInFocus">
-      <div class="info-item"><span class="label">Looking at {{ numberOfNotesInFocus }} notes for the last {{ context.focusScopeInDays }} days</span></div>
+      <div class="info-item"><span class="label">Looking at {{ numberOfNotesInFocus }} notes for {{ context.focusScopeInDays }} days</span></div>
     </ng-container>
     <div class="info-item">
-      <span class="label">Its&nbsp;<span class="value">{{ currentDate | date:'fullDate' }}</span> today.</span> 
+      <span class="label">Its&nbsp;<span class="value">{{ currentDate | date:'fullDate' }}</span> today.</span>
     </div>
     <div class="info-item">
       <span class="label"><span class="value">{{ currentDate | date:'HH:mm:ss' }}</span></span>
-      
+
     </div>
     <div class="info-item">
       <span class="label">Week</span>
@@ -17,7 +17,7 @@
     <div class="info-item">
       <span class="label">Location:</span>
       <span class="value">{{ location }}</span>
-    </div>  
+    </div>
   </div>
   </mat-toolbar>
 

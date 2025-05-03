@@ -23,13 +23,13 @@ export class AppComponent implements OnInit {
 
   dayNotesList$!: Observable<DayNote[]>;
   context!: FocusContext;
-  
+
   isSideOpen = false;
 
-  constructor(private daynotesService: DaynotesService) {}  
+  constructor(private daynotesService: DaynotesService) {}
 
   ngOnInit(): void {
-    this.dayNotesList$ = this.daynotesService.loadDayNotes();
+    this.dayNotesList$ = this.daynotesService.loadDayNotes('timestamp', 'desc');
     // Ideal to setup a service to gather the context
     this.context = {
       numberOfNotesInFocus$: this.dayNotesList$.pipe(map(notes => notes.length)),

@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import cors from 'cors';
 import { DayNote } from './daynote';
 import {initDayNotesFromJson} from './init';
+import {DataResult, FilterCriteria, SortOptions, TimeZoomLevel} from './data/data.model';
 
 // Initialize express app
 const app = express();
@@ -15,9 +16,86 @@ app.use(cors());
 // In-memory database
 let dayNotes: DayNote[] = initDayNotesFromJson('./data.json');
 
+function fetchData(
+  filterCriteria: FilterCriteria,
+  sortOptions: SortOptions,
+  timeZoomLevel: TimeZoomLevel
+): Promise<DayNote[]> {
+  return new Promise((resolve) => {
+    // 1. Simulate fetching data (replace with your actual data fetching logic)
+    let data: DayNote[] = dayNotes;
+
+    // 2. Apply filtering
+    if (filterCriteria.category && filterCriteria.category !== '*') {
+      data = data.filter(item => item.category === filterCriteria.category);
+    }
+
+    // 3. Apply sorting
+    if (sortOptions.sortBy) {
+      const sortFactor = sortOptions.sortOrder === 'desc' ? -1 : 1;
+      data.sort((a, b) => {
+        const valueA = a[sortOptions.sortBy as keyof DayNote]; // Access property by key
+        const valueB = b[sortOptions.sortBy as keyof DayNote];
+
+        if (valueA < valueB) {
+          return -1 * sortFactor;
+        }
+        if (valueA > valueB) {
+          return 1 * sortFactor;
+        }
+        return 0;
+      });
+    }
+
+    // 4. Apply time zoom
+    let zoomedData: DayNote[] = [];
+    if (timeZoomLevel === 'monthly') {
+      const monthlyData: { [key: string]: DayNote } = {};
+      //data.forEach(item => {
+        // Time Zoom TODO
+      //});
+      zoomedData = Object.values(monthlyData);
+    } else if (timeZoomLevel === 'daily') {
+      zoomedData = data;
+    }
+    // In a real application, you would aggregate the data based on the timeZoomLevel
+    // For example, if timeZoomLevel is 'monthly', you would group the data by month
+    // and calculate the sum/average/etc. for each month.
+
+    // 5. Return the result
+    const result: DataResult<DayNote[]> = { data: zoomedData };
+    resolve(result.data);
+  });
+}
+
 // GET all day notes
-app.get('/api/daynotes', (req: Request, res: Response) => {
-  res.status(200).json(dayNotes);
+app.get('/api/daynotes', async (req: Request, res: Response) => {
+  try {
+    // 1. Extract query parameters
+    const category = req.query.category as string;
+    const sortBy = req.query.sortBy as string;
+    const sortOrder = req.query.sortOrder as 'asc' | 'desc' || 'asc';  // Default sort order
+    const timeZoom = req.query.timeZoom as TimeZoomLevel || 'daily';    // Default time zoom
+
+
+    // 2. Construct filter and sort options
+    const filterCriteria: FilterCriteria = {
+      category: category,
+    };
+    const sortOptions: SortOptions = {
+      sortBy: sortBy,
+      sortOrder: sortOrder,
+    };
+
+    // 3. Fetch and process the data
+    const result = await fetchData(filterCriteria, sortOptions, timeZoom);
+
+    // 4. Send the response
+    res.json(result);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 // POST create a new day note

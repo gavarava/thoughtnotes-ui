@@ -7,9 +7,9 @@ Content-Type: application/json
 
 {
   "category": "Mental Health",
-  "tag": "Therapi",
-  "title": "Therapi session on Mindler",
-  "description": "<b>Completed a session with Work-Life-Balance coach Viveka.</b>",
-  "date": "2025-04-29",
+  "tag": "Finance",
+  "title": "Checked the SimplyWallStreet reports",
+  "description": "<b>Checked the SimplyWallStreet reports",
+  "date": "2025-05-03",
   "mood": "done"
 }

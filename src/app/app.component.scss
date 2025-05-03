@@ -85,7 +85,8 @@
 
 /* Hover state - using Material Design states */
 .mat-sidenav .sidebar-button:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: map-get(mat.$azure-palette, 80);
+  transition: background-color 0.2s ease-in;
 }
 
 /* Active state */
