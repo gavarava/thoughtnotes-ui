@@ -1,5 +1,5 @@
 // focused-header.component.ts
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -18,6 +18,10 @@ export class FocusHeaderComponent implements OnInit {
 
   @Input()
   context!: FocusContext;
+
+  // TODO emit outwards
+  @Output()
+  updatedContext!: FocusContext;
 
   constructor() {
     // Update time every second

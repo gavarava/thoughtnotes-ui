@@ -1,5 +1,4 @@
 export interface FilterCriteria {
-  dateRange?: { start: string; end: string };
   category?: string;
   tag?: string;
   mood?: string;

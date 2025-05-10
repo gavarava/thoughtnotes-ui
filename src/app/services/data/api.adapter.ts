@@ -31,15 +31,16 @@ export class ApiDataAdapter implements DataRepositoryPort<DayNote[]> {
   ): string {
     let url = `${this.apiUrl}?`; //  base URL
     // Build the query parameters
-    if (filterCriteria.dateRange) {
-      url += `startDate=${filterCriteria.dateRange.start}&endDate=${filterCriteria.dateRange.end}&`;
-    }
+    // if (filterCriteria.dateRange) {
+    //   url += `startDate=${filterCriteria.dateRange.start}&endDate=${filterCriteria.dateRange.end}&`;
+    // }
     if (filterCriteria.category) {
       url += `category=${filterCriteria.category}&`;
     }
     if (sortOptions.sortBy) {
       url += `sortBy=${sortOptions.sortBy}&sortOrder=${sortOptions.sortOrder}&`
     }
+    // FIXME implementation of time zoom
     url += `timeZoom=${timeZoomLevel}`;
     return url;
   }

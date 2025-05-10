@@ -27,7 +27,10 @@ function fetchData(
 
     // 2. Apply filtering
     if (filterCriteria.category && filterCriteria.category !== '*') {
-      data = data.filter(item => item.category === filterCriteria.category);
+      data = data.filter(item => {
+        console.debug('item --> ' + JSON.stringify(item.category));
+        return item.category.toLowerCase() === filterCriteria.category?.toLowerCase();
+      });
     }
 
     // 3. Apply sorting
@@ -71,6 +74,7 @@ function fetchData(
 // GET all day notes
 app.get('/api/daynotes', async (req: Request, res: Response) => {
   try {
+    console.debug("Fetching data...");
     // 1. Extract query parameters
     const category = req.query.category as string;
     const sortBy = req.query.sortBy as string;
