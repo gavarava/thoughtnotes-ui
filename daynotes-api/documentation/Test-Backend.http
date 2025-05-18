@@ -1,8 +1,8 @@
-GET http://localhost:9000/api/daynotes
+GET http://localhost:9000/api/thoughtnotes
 
 ###
 ## Save a Note
-POST http://localhost:9000/api/daynotes
+POST http://localhost:9000/api/thoughtnotes
 Content-Type: application/json
 
 {

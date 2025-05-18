@@ -5,23 +5,23 @@ import { DataRepositoryPort } from './data-repository.port';
 import { DataResult } from './data.model';
 import { FilterCriteria, SortOptions, TimeZoomLevel } from './data.model';
 import { Observable } from 'rxjs';
-import {DayNote} from '../../model/daynote';
+import {ThoughtNote} from '../../model/thoughtnote';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ApiDataAdapter implements DataRepositoryPort<DayNote[]> {
-  private apiUrl = "http://localhost:9000/api/daynotes";
+export class ApiDataAdapter implements DataRepositoryPort<ThoughtNote[]> {
+  private apiUrl = "http://localhost:9000/api/thoughtnotes";
   constructor(private http: HttpClient) {}
 
   getData(
     filterCriteria: FilterCriteria,
     sortOptions: SortOptions,
     timeZoomLevel: TimeZoomLevel
-  ): Observable<DataResult<DayNote[]>> {
+  ): Observable<DataResult<ThoughtNote[]>> {
     const url = this.buildApiUrl(filterCriteria, sortOptions, timeZoomLevel);
     console.log('API Adapter - getData', url);
-    return this.http.get<DataResult<DayNote[]>>(url);
+    return this.http.get<DataResult<ThoughtNote[]>>(url);
   }
 
   private buildApiUrl(
@@ -37,6 +37,15 @@ export class ApiDataAdapter implements DataRepositoryPort<DayNote[]> {
     if (filterCriteria.category) {
       url += `category=${filterCriteria.category}&`;
     }
+
+    if (filterCriteria.category) {
+      url += `tag=${filterCriteria.tag}&`;
+    }
+
+    if (filterCriteria.category) {
+      url += `mood=${filterCriteria.mood}&`;
+    }
+
     if (sortOptions.sortBy) {
       url += `sortBy=${sortOptions.sortBy}&sortOrder=${sortOptions.sortOrder}&`
     }

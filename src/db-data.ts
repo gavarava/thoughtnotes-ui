@@ -1,4 +1,4 @@
-export const DAYNOTESLIST: any =
+export const THOUGHTNOTESLIST: any =
 [
     {
       "UUID": "a1b2c3d4-e5f6-7890-1234-567890abcdef",

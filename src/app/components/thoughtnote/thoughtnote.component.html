@@ -1,0 +1,30 @@
+<div class="thoughtnote-item">
+    <div class="thoughtnote-header">
+      <h2>{{ thoughtnote.title }}</h2>
+      <span class="thoughtnote-category">{{ thoughtnote.category }}</span>
+      <span class="thoughtnote-tag">{{ thoughtnote.tag }}</span>
+    </div>
+
+    <div class="thoughtnote-details">
+      <div class="thoughtnote-description" [innerHTML]="thoughtnote.description"></div>
+
+      <div class="thoughtnote-metadata">
+        <div class="thoughtnote-date">
+          <span class="label">Date:</span>
+          <span>{{ thoughtnote.date }}</span>
+        </div>
+
+        <div class="thoughtnote-mood">
+          <span class="label">Status:</span>
+          <span>{{ thoughtnote.mood }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="thoughtnote-footer">
+      <div><button mat-icon-button class="copy-btn" (click)="addToFavourites(thoughtnote.UUID)"><mat-icon>star</mat-icon></button>
+      <button mat-icon-button class="copy-btn" (click)="addToFavourites(thoughtnote.UUID)"><mat-icon>schedule</mat-icon></button></div>
+      <small>Created: {{ thoughtnote.timestamp | date:'medium' }}</small>
+    </div>
+
+  </div>

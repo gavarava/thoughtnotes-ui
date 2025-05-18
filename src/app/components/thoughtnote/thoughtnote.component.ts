@@ -1,18 +1,18 @@
 import { Component, Input } from '@angular/core';
-import { DayNote } from '../../model/daynote';
+import { ThoughtNote } from '../../model/thoughtnote';
 import { CommonModule } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 
 @Component({
-  selector: 'app-daynote',
+  selector: 'app-thoughtnote',
   imports: [CommonModule, MatIconModule],
-  templateUrl: './daynote.component.html',
-  styleUrl: './daynote.component.scss'
+  templateUrl: './thoughtnote.component.html',
+  styleUrl: './thoughtnote.component.scss'
 })
-export class DaynoteComponent {
+export class ThoughtnoteComponent {
 
   @Input({ required: true })
-  daynote!: DayNote;
+  thoughtnote!: ThoughtNote;
 
   addToFavourites(value: string): void {
     navigator.clipboard.writeText(value).then(() => {
@@ -21,5 +21,5 @@ export class DaynoteComponent {
       console.error('Could not copy text: ', err);
     });
   }
-  
+
 }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DaynoteComponent } from './daynote.component';
+import { ThoughtnoteComponent } from './thoughtnote.component';
 
-describe('DaynoteComponent', () => {
-  let component: DaynoteComponent;
-  let fixture: ComponentFixture<DaynoteComponent>;
+describe('ThoughtnoteComponent', () => {
+  let component: ThoughtnoteComponent;
+  let fixture: ComponentFixture<ThoughtnoteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DaynoteComponent]
+      imports: [ThoughtnoteComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DaynoteComponent);
+    fixture = TestBed.createComponent(ThoughtnoteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

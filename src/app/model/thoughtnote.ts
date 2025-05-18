@@ -1,4 +1,4 @@
-export interface DayNote {
+export interface ThoughtNote {
     UUID: string;
     timestamp: number;
     category: string;

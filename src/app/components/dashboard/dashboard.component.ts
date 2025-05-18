@@ -3,13 +3,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {DaynoteComponent} from '../daynote/daynote.component';
+import {ThoughtnoteComponent} from '../thoughtnote/thoughtnote.component';
 import {AsyncPipe, CommonModule} from '@angular/common';
 import {FocusHeaderComponent} from '../focus-header/focus-header.component';
 import {map, Observable} from 'rxjs';
-import {DayNote} from '../../model/daynote';
+import {ThoughtNote} from '../../model/thoughtnote';
 import {FocusContext} from '../../model/focus-context';
-import {DaynotesService} from '../../services/daynotes.service';
+import {ThoughtnotesService} from '../../services/thoughtnotes.service';
 
 @Component({
   selector: 'thoughtnotes-dashboard',
@@ -17,7 +17,7 @@ import {DaynotesService} from '../../services/daynotes.service';
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
-    DaynoteComponent,
+    ThoughtnoteComponent,
     CommonModule,
     AsyncPipe,
     FocusHeaderComponent],
@@ -26,17 +26,17 @@ import {DaynotesService} from '../../services/daynotes.service';
 })
 export class DashboardComponent implements OnInit {
 
-  dayNotesList$!: Observable<DayNote[]>;
+  thoughtnotesList$!: Observable<ThoughtNote[]>;
   context!: FocusContext;
 
   ngOnInit(): void {
-    this.dayNotesList$ = this.daynotesService.loadDayNotes('*','*', '*','timestamp', 'desc');
+    this.thoughtnotesList$ = this.thoughtnotesService.loadThoughtNotes('*','*', 'done','timestamp', 'desc');
     // Ideal to setup a service to gather the context
     this.context = {
-      numberOfNotesInFocus$: this.dayNotesList$.pipe(map(notes => notes.length)),
+      numberOfNotesInFocus$: this.thoughtnotesList$.pipe(map(notes => notes.length)),
       focusScopeInDays: 30
     };
   }
 
-  constructor(private daynotesService: DaynotesService) {}
+  constructor(private thoughtnotesService: ThoughtnotesService) {}
 }

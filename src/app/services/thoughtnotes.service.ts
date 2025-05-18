@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {DayNote} from '../model/daynote';
+import {ThoughtNote} from '../model/thoughtnote';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ApiDataAdapter} from './data/api.adapter';
@@ -7,18 +7,17 @@ import {ApiDataAdapter} from './data/api.adapter';
 @Injectable({
   providedIn: 'root'
 })
-export class DaynotesService {
+export class ThoughtnotesService {
 
   constructor(private apiDataAdapter: ApiDataAdapter) {
   }
 
-  // TODO: Apply Settings to sort and group by
-  loadDayNotes(category='*', tag='*', mood='*', sortParam='timestamp', sortDirection: 'asc' | 'desc' = 'asc'): Observable<DayNote[]> {
+  loadThoughtNotes(category='*', tag='*', mood='*', sortParam='timestamp', sortDirection: 'asc' | 'desc' = 'asc'): Observable<ThoughtNote[]> {
     return this.apiDataAdapter.getData({category: category, tag:tag, mood:mood}, {sortBy: sortParam, sortOrder: sortDirection}, 'daily')
       .pipe(
         map(response => {
           // Extract the data
-          let notes: DayNote[] = [];
+          let notes: ThoughtNote[] = [];
           if (response && response.data && Array.isArray(response.data)) {
             notes = response.data;
           } else if (response && typeof response === 'object') {
@@ -33,10 +32,10 @@ export class DaynotesService {
       );
   }
 
-  private sort(notes: DayNote[], sortParam: string, sortDirection: "asc" | "desc") {
+  private sort(notes: ThoughtNote[], sortParam: string, sortDirection: "asc" | "desc") {
     notes.sort((a, b) => {
-      const valueA = a[sortParam as keyof DayNote];
-      const valueB = b[sortParam as keyof DayNote];
+      const valueA = a[sortParam as keyof ThoughtNote];
+      const valueB = b[sortParam as keyof ThoughtNote];
 
       // Handle different data types for comparison
       if (sortDirection === 'asc') {
