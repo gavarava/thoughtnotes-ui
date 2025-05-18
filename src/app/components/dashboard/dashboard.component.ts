@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -25,6 +25,15 @@ import {ThoughtnotesService} from '../../services/thoughtnotes.service';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
+
+  @Input({ required: true })
+  thoughtNotes!: ThoughtNote[]
+
+  isSideOpen = false;
+
+  onMenuClick() {
+    this.isSideOpen = !this.isSideOpen;
+  }
 
   thoughtnotesList$!: Observable<ThoughtNote[]>;
   context!: FocusContext;
