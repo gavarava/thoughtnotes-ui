@@ -6,10 +6,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {ThoughtnoteComponent} from '../thoughtnote/thoughtnote.component';
 import {AsyncPipe, CommonModule} from '@angular/common';
 import {FocusHeaderComponent} from '../focus-header/focus-header.component';
-import {map, Observable} from 'rxjs';
+import {map, Observable, of} from 'rxjs';
 import {ThoughtNote} from '../../model/thoughtnote';
 import {FocusContext} from '../../model/focus-context';
 import {ThoughtnotesService} from '../../services/thoughtnotes.service';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'thoughtnotes-dashboard',
@@ -20,10 +21,9 @@ import {ThoughtnotesService} from '../../services/thoughtnotes.service';
     ThoughtnoteComponent,
     CommonModule,
     AsyncPipe,
-    FocusHeaderComponent],
+    FocusHeaderComponent, RouterLink, RouterLinkActive],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
-})
+  styleUrl: './dashboard.component.scss'})
 export class DashboardComponent implements OnInit {
 
   @Input({ required: true })
@@ -39,13 +39,12 @@ export class DashboardComponent implements OnInit {
   context!: FocusContext;
 
   ngOnInit(): void {
-    this.thoughtnotesList$ = this.thoughtnotesService.loadThoughtNotes('*','*', 'done','timestamp', 'desc');
+    this.thoughtnotesList$ = of(this.thoughtNotes);
+
     // Ideal to setup a service to gather the context
     this.context = {
       numberOfNotesInFocus$: this.thoughtnotesList$.pipe(map(notes => notes.length)),
       focusScopeInDays: 30
     };
   }
-
-  constructor(private thoughtnotesService: ThoughtnotesService) {}
 }

@@ -1,5 +1,10 @@
+export const THOUGHNOTESCATEGORIES: any = [
+    "Fitness",
+  ]
+;
+
 export const THOUGHTNOTESLIST: any =
-[
+  [
     {
       "UUID": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
       "timestamp": 1712030400000,

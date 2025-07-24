@@ -1,0 +1,148 @@
+@use '@angular/material' as mat;
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.main-header-2 {
+  background: map-get(mat.$azure-palette, 70);
+  padding: 20px 15px;
+}
+
+.sidebar-menu {
+  background: map-get(mat.$azure-palette, 70);
+}
+
+.main-footer {
+  // TODO: Add styles for the footer
+  background: map-get(mat.$azure-palette, 70);
+  padding: 20px 15px;
+}
+
+/* Styles for buttons inside mat-sidenav */
+.mat-sidenav .sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Button container */
+.mat-sidenav .sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+}
+
+/* Standard button styling */
+.mat-sidenav .sidebar-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 4px;
+  border: none;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: left;
+  outline: none;
+  width: 100%;
+}
+
+/* Icon styling - compatible with mat-icon */
+.mat-sidenav .sidebar-button .mat-icon {
+  margin-right: 16px;
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover state - using Material Design states */
+.mat-sidenav .sidebar-button:hover {
+  background-color: map-get(mat.$azure-palette, 80);
+  transition: background-color 0.2s ease-in;
+}
+
+/* Active state */
+.mat-sidenav .sidebar-button.active {
+  background-color: map-get(mat.$azure-palette, 100);
+  color: map-get(mat.$azure-palette, 25);
+}
+
+/* Button groups with heading */
+.mat-sidenav .button-group {
+  margin-bottom: 8px;
+}
+
+.mat-sidenav .button-group-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: map-get(mat.$azure-palette, 25);
+  background-color: map-get(mat.$azure-palette, 100);
+  margin: 16px 16px 8px;
+  font-weight: 500;
+}
+
+/* Optional: different styling for primary actions */
+.mat-sidenav .sidebar-button.primary {
+  color: #1976d2;
+}
+
+/* Responsive adjustments for collapsed sidebar */
+.mat-sidenav.collapsed {
+  width: 56px;
+}
+
+.mat-sidenav.collapsed .sidebar-button {
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.mat-sidenav.collapsed .sidebar-button .mat-icon {
+  margin-right: 0;
+}
+
+.mat-sidenav.collapsed .sidebar-button span.text,
+.mat-sidenav.collapsed .button-group-title {
+  display: none;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 10px;
+  padding: 20px 15px;
+  border-bottom: 2px solid map-get(mat.$azure-palette, 100);
+
+  a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: map-get(mat.$azure-palette, 80);
+    color: map-get(mat.$azure-palette, 25);
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 4px 4px 0 0; // Rounded top corners
+    transition: background-color 0.2s ease;
+    z-index: 5999;
+
+    &:hover {
+      background-color: map-get(mat.$azure-palette, 90);
+    }
+
+    &.active { // Applied via routerLinkActive
+      background-color: map-get(mat.$azure-palette, 75);
+      color: map-get(mat.$azure-palette, 25);
+      font-weight: 950;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); // Match thought-notes shadow
+    }
+  }
+}
+

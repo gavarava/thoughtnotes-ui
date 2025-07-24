@@ -1,7 +1,4 @@
-  <nav>
-    <a routerLink="/timeline">Timeline</a>
-    <a routerLink="/category">Category</a>
-    <a routerLink="/tag">Tag</a>
-  </nav>
-  <router-outlet></router-outlet>
-
+<div class="main-header">
+  <span class="thought-notes"><mat-icon>cloud_upload</mat-icon>&nbsp;Thought Notes</span>
+</div>
+<thoughtnotes-dashboard [thoughtNotes]="THOUGHTNOTESLIST"></thoughtnotes-dashboard>

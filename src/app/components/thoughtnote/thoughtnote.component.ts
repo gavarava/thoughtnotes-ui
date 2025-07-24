@@ -15,6 +15,7 @@ export class ThoughtnoteComponent {
   thoughtnote!: ThoughtNote;
 
   addToFavourites(value: string): void {
+    // FIXME this is just a test of clipboard
     navigator.clipboard.writeText(value).then(() => {
       console.log('Copied:', value);
     }).catch(err => {

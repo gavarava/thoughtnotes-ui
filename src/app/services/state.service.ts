@@ -1,16 +1,18 @@
-import { Injectable } from '@angular/core';
-import { THOUGHTNOTESLIST } from './data/db-data';
-import { ThoughtNote } from '../model/thoughtnote';
+import {Injectable} from '@angular/core';
+import {THOUGHTNOTESLIST} from './data/db-data';
+import {THOUGHNOTESCATEGORIES} from './data/db-data';
+import {ThoughtNote} from '../model/thoughtnote';
 
 interface FilterSettings {
-  category?: string;
+  category: string | null;
   tag?: string;
+  dateTimeRange?: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class StateService {
   private activeTab = 'timeline';
-  private filters: FilterSettings = {};
+  private filters: FilterSettings = {category: THOUGHNOTESCATEGORIES};
 
   // State management
   setActiveTab(tab: string) {
