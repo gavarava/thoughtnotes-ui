@@ -1,8 +1,8 @@
 <mat-toolbar class="main-header">
-  <button *ngIf="!isSideOpen" mat-icon-button class="copy-btn" aria-label="Open Sidebar menu" (click)="onMenuClick()">
+  <button *ngIf="!isSideOpen" mat-icon-button class="copy-btn" aria-label="Open Sidebar menu" (click)="onSideNavToggled()">
     <mat-icon>menu</mat-icon>
   </button>
-  <button *ngIf="isSideOpen" mat-icon-button class="copy-btn" aria-label="Close Sidebar menu" (click)="onMenuClick()">
+  <button *ngIf="isSideOpen" mat-icon-button class="copy-btn" aria-label="Close Sidebar menu" (click)="onSideNavToggled()">
     <mat-icon>close</mat-icon>
   </button>
   <span class="example-spacer"></span>
@@ -27,36 +27,50 @@
   <mat-sidenav mode="side" [(opened)]="isSideOpen" class="sidenav-menu side" [ngStyle]="{'overflow-y': 'auto'}">
     <div class="sidebar-content">
       <div class="button-group">
-        <div class="button-group-title">Organize By</div>
+        <div class="button-group-title" >Organize By</div>
         <div class="sidebar-menu">
-          <button class="sidebar-button">
+          <a routerLink="/organizeby/time/day"
+             routerLinkActive="active"
+             class="sidebar-button">
             <mat-icon>today</mat-icon>
             <span class="text">Day</span>
-          </button>
-          <button class="sidebar-button">
+          </a>
+          <a routerLink="/organizeby/time/week"
+             routerLinkActive="active"
+             class="sidebar-button">
             <mat-icon>view_week</mat-icon>
             <span class="text">Week</span>
-          </button>
-          <button class="sidebar-button active">
+          </a>
+          <a routerLink="/organizeby/time/month"
+             routerLinkActive="active"
+             class="sidebar-button">
             <mat-icon>calendar_month</mat-icon>
             <span class="text">Month</span>
-          </button>
-          <button class="sidebar-button">
+          </a>
+          <a routerLink="/organizeby/time/year"
+             routerLinkActive="active"
+             class="sidebar-button">
             <mat-icon>timelapse</mat-icon>
             <span class="text">Year</span>
-          </button>
-          <button class="sidebar-button">
+          </a>
+          <a routerLink="/organizeby/category"
+             routerLinkActive="active"
+             class="sidebar-button">
             <mat-icon>category</mat-icon>
             <span class="text">Category</span>
-          </button>
-          <button class="sidebar-button">
+          </a>
+          <a routerLink="/organizeby/tag"
+             routerLinkActive="active"
+             class="sidebar-button">
             <mat-icon>sell</mat-icon>
             <span class="text">Tag</span>
-          </button>
-          <button class="sidebar-button">
+          </a>
+          <a routerLink="/organizeby/mood"
+             routerLinkActive="active"
+             class="sidebar-button">
             <mat-icon>mood</mat-icon>
             <span class="text">Mood</span>
-          </button>
+          </a>
         </div>
       </div>
 

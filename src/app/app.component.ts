@@ -17,7 +17,8 @@ import {THOUGHTNOTESLIST} from './services/data/db-data';
     MatSidenavModule,
     CommonModule,
     AppRoutingModule,
-    DashboardComponent],
+    RouterLink,
+    RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

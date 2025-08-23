@@ -10,7 +10,7 @@ import {map, Observable, of} from 'rxjs';
 import {ThoughtNote} from '../../model/thoughtnote';
 import {FocusContext} from '../../model/focus-context';
 import {ThoughtnotesService} from '../../services/thoughtnotes.service';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {ActivatedRoute, RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'thoughtnotes-dashboard',
@@ -27,11 +27,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   @Input({ required: true })
+  dataRange: string | undefined;
+
+  @Input({ required: true })
   thoughtNotes!: ThoughtNote[]
 
-  isSideOpen = false;
+  isSideOpen = true;
 
-  onMenuClick() {
+  onSideNavToggled() {
     this.isSideOpen = !this.isSideOpen;
   }
 
@@ -40,7 +43,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.thoughtnotesList$ = of(this.thoughtNotes);
-
     // Ideal to setup a service to gather the context
     this.context = {
       numberOfNotesInFocus$: this.thoughtnotesList$.pipe(map(notes => notes.length)),
