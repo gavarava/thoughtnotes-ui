@@ -24,87 +24,90 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-menu">
-  <mat-sidenav mode="side" [(opened)]="isSideOpen" class="sidenav-menu side" [ngStyle]="{'overflow-y': 'auto'}">
+  <mat-sidenav mode="side" [(opened)]="isSideOpen">
     <div class="sidebar-content">
       <div class="button-group">
-        <div class="button-group-title" >Organize By</div>
+        <div class="button-group-title">Organize By</div>
         <div class="sidebar-menu">
-          <a routerLink="/organizeby/time/day"
-             routerLinkActive="active"
-             class="sidebar-button">
+          <button routerLink="/organizeby/time/daily"
+                  routerLinkActive="active"
+                  class="sidebar-button">
             <mat-icon>today</mat-icon>
             <span class="text">Day</span>
-          </a>
-          <a routerLink="/organizeby/time/week"
-             routerLinkActive="active"
-             class="sidebar-button">
+          </button>
+          <button routerLink="/organizeby/time/weekly"
+                  routerLinkActive="active"
+                  class="sidebar-button">
             <mat-icon>view_week</mat-icon>
             <span class="text">Week</span>
-          </a>
-          <a routerLink="/organizeby/time/month"
-             routerLinkActive="active"
-             class="sidebar-button">
+          </button>
+          <button routerLink="/organizeby/time/monthly"
+                  routerLinkActive="active"
+                  class="sidebar-button">
             <mat-icon>calendar_month</mat-icon>
             <span class="text">Month</span>
-          </a>
-          <a routerLink="/organizeby/time/year"
-             routerLinkActive="active"
-             class="sidebar-button">
+          </button>
+          <button routerLink="/organizeby/time/yearly"
+                  routerLinkActive="active"
+                  class="sidebar-button">
             <mat-icon>timelapse</mat-icon>
             <span class="text">Year</span>
-          </a>
-          <a routerLink="/organizeby/category"
-             routerLinkActive="active"
-             class="sidebar-button">
+          </button>
+          <button routerLink="/organizeby/category"
+                  routerLinkActive="active"
+                  class="sidebar-button">
             <mat-icon>category</mat-icon>
             <span class="text">Category</span>
-          </a>
-          <a routerLink="/organizeby/tag"
-             routerLinkActive="active"
-             class="sidebar-button">
+          </button>
+          <button routerLink="/organizeby/tag"
+                  routerLinkActive="active"
+                  class="sidebar-button">
             <mat-icon>sell</mat-icon>
             <span class="text">Tag</span>
-          </a>
-          <a routerLink="/organizeby/mood"
-             routerLinkActive="active"
-             class="sidebar-button">
+          </button>
+          <button routerLink="/organizeby/mood"
+                  routerLinkActive="active"
+                  class="sidebar-button">
             <mat-icon>mood</mat-icon>
             <span class="text">Mood</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="button-group">
-        <div class="button-group-title">Toolbox</div>
-        <div class="sidebar-menu">
-          <button class="sidebar-button">
-            <mat-icon>add</mat-icon>
-            <span class="text">Add</span>
-          </button>
-          <button class="sidebar-button">
-            <mat-icon>delete</mat-icon>
-            <span class="text">Delete</span>
-          </button>
-          <button class="sidebar-button">
-            <mat-icon>zoom_in</mat-icon>
-            <span class="text">Zoom-in time</span>
-          </button>
-          <button class="sidebar-button">
-            <mat-icon>zoom_out</mat-icon>
-            <span class="text">Zoom-out time</span>
           </button>
         </div>
       </div>
+        <div class="button-group">
+          <div class="button-group-title">Toolbox</div>
+          <div class="sidebar-menu">
+            <button class="sidebar-button">
+              <mat-icon>add</mat-icon>
+              <span class="text">Add</span>
+            </button>
+            <button class="sidebar-button">
+              <mat-icon>delete</mat-icon>
+              <span class="text">Delete</span>
+            </button>
+            <button class="sidebar-button">
+              <mat-icon>zoom_in</mat-icon>
+              <span class="text">Zoom-in time</span>
+            </button>
+            <button class="sidebar-button">
+              <mat-icon>zoom_out</mat-icon>
+              <span class="text">Zoom-out time</span>
+            </button>
+          </div>
+        </div>
     </div>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content class="sidenav-content">
     <app-focus-header [context]="context"></app-focus-header>
-    <!--*ngFor="let eachthoughtnote of thoughtnotesList$ | async;"-->
-    @if (thoughtnotesList$ | async; as thoughtnotesCollection) {
+    <!--*ngFor="let eachthoughtnote of thoughtNotes$ | async;"-->
+    @if (thoughtNotes) {
       <!--Benefits of using async pipe is that the Observable is unsubscribed automatically when the component is destroyed-->
-      @for (eachthoughtnote of thoughtnotesCollection; track eachthoughtnote.UUID) {
+      @for (eachthoughtnote of thoughtNotes; track eachthoughtnote.UUID) {
         <app-thoughtnote [thoughtnote]="eachthoughtnote"></app-thoughtnote>
       }
+    } @else {
+      <div class="no-thoughtnotes-message">
+        No thought notes available for the selected time range.
+      </div>
     }
   </mat-sidenav-content>
 </mat-sidenav-container>

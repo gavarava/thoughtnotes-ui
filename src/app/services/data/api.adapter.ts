@@ -11,7 +11,7 @@ import {ThoughtNote} from '../../model/thoughtnote';
   providedIn: 'root',
 })
 export class ApiDataAdapter implements DataRepositoryPort<ThoughtNote[]> {
-  private apiUrl = "http://localhost:9000/api/thoughtnotes";
+  private apiUrl = "http://localhost:9000/api/daynotes" // TODO fix name
   constructor(private http: HttpClient) {}
 
   getData(

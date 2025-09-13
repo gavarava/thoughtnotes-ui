@@ -1,1 +1,3 @@
-<thoughtnotes-dashboard [thoughtNotes]="THOUGHTNOTESLIST" [dataRange]="dataRange"></thoughtnotes-dashboard>
+@if (thoughtNotes$ | async; as thoughtNotes) {
+  <thoughtnotes-dashboard [thoughtNotes]="thoughtNotes" [context]="focusContext" [dataRange]="dataRange"></thoughtnotes-dashboard>
+}

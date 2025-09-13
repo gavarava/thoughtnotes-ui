@@ -1,4 +1,4 @@
-<mat-toolbar class="focus-header">
+<mat-toolbar  *ngIf="context" class="focus-header">
   <div class="focus-header">
     <ng-container *ngIf="context.numberOfNotesInFocus$ | async as numberOfNotesInFocus">
       <div class="info-item"><span class="label">Looking at {{ numberOfNotesInFocus }} notes for {{ context.focusScopeInDays }} days</span></div>

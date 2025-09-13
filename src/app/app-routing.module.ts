@@ -3,8 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 import {TimeBasedViewsComponent} from "./components/time-based-views/time-based-views.component";
 
 export const routes: Routes = [
-  { path: "",
-     redirectTo: "organizeby/time/week",
+  { path: "", // default path looks like this
+     redirectTo: "organizeby/time/daily",
       pathMatch: "full"
   },
   {

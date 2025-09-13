@@ -6,8 +6,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {CommonModule} from '@angular/common';
 import {AppRoutingModule} from './app-routing.module';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {THOUGHTNOTESLIST} from './services/data/db-data';
 
 @Component({
   selector: 'app-root',
@@ -23,5 +21,4 @@ import {THOUGHTNOTESLIST} from './services/data/db-data';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  protected readonly THOUGHTNOTESLIST = THOUGHTNOTESLIST;
 }

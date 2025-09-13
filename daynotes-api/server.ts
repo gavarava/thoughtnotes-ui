@@ -16,6 +16,13 @@ app.use(cors());
 // In-memory database
 let dayNotes: DayNote[] = initDayNotesFromJson('./data.json');
 
+function extractDateString(date: String, parts: Array<'year' | 'month' | 'day'>): string {
+  const iso = date.split('T')[0]; // "YYYY-MM-DD"
+  const [year, month, day] = iso.split('-');
+  const map = { year, month, day };
+  return parts.map(part => map[part]).join('-');
+}
+
 function fetchData(
   filterCriteria: FilterCriteria,
   sortOptions: SortOptions,
@@ -53,13 +60,11 @@ function fetchData(
     // 4. Apply time zoom
     let zoomedData: DayNote[] = [];
     if (timeZoomLevel === 'monthly') {
-      const monthlyData: { [key: string]: DayNote } = {};
-      //data.forEach(item => {
-        // Time Zoom TODO
-      //});
-      zoomedData = Object.values(monthlyData);
+      let monthString = extractDateString(new Date().toISOString(), ['year', 'month']); // e\.g\., "2023-10"
+      zoomedData = data.filter(value => extractDateString(value.date, ['year', 'month']) === monthString);
     } else if (timeZoomLevel === 'daily') {
-      zoomedData = data;
+      let dateString = new Date().toISOString().split('T')[0];
+      zoomedData = data.filter(value => value.date === dateString);
     }
     // In a real application, you would aggregate the data based on the timeZoomLevel
     // For example, if timeZoomLevel is 'monthly', you would group the data by month

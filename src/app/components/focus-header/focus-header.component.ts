@@ -17,11 +17,7 @@ export class FocusHeaderComponent implements OnInit {
   location: string = 'Loading...';
 
   @Input()
-  context!: FocusContext;
-
-  // TODO emit outwards
-  @Output()
-  updatedContext!: FocusContext;
+  context: FocusContext | undefined;
 
   constructor() {
     // Update time every second

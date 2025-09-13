@@ -19,11 +19,16 @@
   padding: 20px 15px;
 }
 
+.sidenav-menu,
+.sidebar-content {
+  min-height: 100vh;
+}
+
 /* Styles for buttons inside mat-sidenav */
 .mat-sidenav .sidebar-content {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh ;
   overflow-y: auto;
 }
 
@@ -79,6 +84,7 @@
 /* Button groups with heading */
 .mat-sidenav .button-group {
   margin-bottom: 8px;
+  position: sticky;
 }
 
 .mat-sidenav .button-group-title {
@@ -121,7 +127,7 @@
   border-bottom: 2px solid map-get(mat.$azure-palette, 100);
 
   a {
-    display: inline-block;
+    display: inline;
     padding: 10px 20px;
     background-color: map-get(mat.$azure-palette, 80);
     color: map-get(mat.$azure-palette, 25);

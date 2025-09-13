@@ -3,6 +3,7 @@ import {ThoughtNote} from '../model/thoughtnote';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ApiDataAdapter} from './data/api.adapter';
+import {TimeZoomLevel} from './data/data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class ThoughtnotesService {
   constructor(private apiDataAdapter: ApiDataAdapter) {
   }
 
-  loadThoughtNotes(category='*', tag='*', mood='*', sortParam='timestamp', sortDirection: 'asc' | 'desc' = 'asc'): Observable<ThoughtNote[]> {
-    return this.apiDataAdapter.getData({category: category, tag:tag, mood:mood}, {sortBy: sortParam, sortOrder: sortDirection}, 'daily')
+  loadThoughtNotes(category='*', tag='*', mood='*', sortParam='timestamp', sortDirection: 'asc' | 'desc' = 'asc', timeZoomLevel: TimeZoomLevel): Observable<ThoughtNote[]> {
+    return this.apiDataAdapter.getData({category: category, tag:tag, mood:mood}, {sortBy: sortParam, sortOrder: sortDirection}, timeZoomLevel)
       .pipe(
         map(response => {
           // Extract the data
