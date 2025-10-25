@@ -2,14 +2,14 @@ GET http://localhost:9000/api/thoughtnotes
 
 ###
 ## Save a Note
-POST http://localhost:9000/api/thoughtnotes
+POST http://localhost:9000/api/daynotes
 Content-Type: application/json
 
 {
-  "category": "Mental Health",
+  "category": "Financial Health",
   "tag": "Finance",
   "title": "Checked the SimplyWallStreet reports",
   "description": "<b>Checked the SimplyWallStreet reports",
-  "date": "2025-05-03",
+  "date": "2025-10-21",
   "mood": "done"
 }

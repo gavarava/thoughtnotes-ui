@@ -17,7 +17,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Use `computed()` for derived state
 - Set `changeDetection: ChangeDetectionStrategy.OnPush` in `@Component` decorator
 - Prefer inline templates for small components
-- Prefer Reactive forms instead of Template-driven ones
+- Prefer Reactive forms instead of Template-driven ones IF the form is complex
 - Do NOT use `ngClass`, use `class` bindings instead
 - DO NOT use `ngStyle`, use `style` bindings instead
 ## State Management

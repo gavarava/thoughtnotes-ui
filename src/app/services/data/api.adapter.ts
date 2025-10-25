@@ -11,7 +11,7 @@ import {ThoughtNote} from '../../model/thoughtnote';
   providedIn: 'root',
 })
 export class ApiDataAdapter implements DataRepositoryPort<ThoughtNote[]> {
-  private apiUrl = "http://localhost:9000/api/daynotes" // TODO fix name
+  private apiUrl = "http://localhost:9000/api/daynotes" // TODO fix api url from environment, can we use localstorage?
   constructor(private http: HttpClient) {}
 
   getData(
@@ -22,6 +22,10 @@ export class ApiDataAdapter implements DataRepositoryPort<ThoughtNote[]> {
     const url = this.buildApiUrl(filterCriteria, sortOptions, timeZoomLevel);
     console.log('API Adapter - getData', url);
     return this.http.get<DataResult<ThoughtNote[]>>(url);
+  }
+
+  saveData(data: ThoughtNote): Observable<ThoughtNote> {
+    return this.http.post<ThoughtNote>(this.apiUrl, data);
   }
 
   private buildApiUrl(
