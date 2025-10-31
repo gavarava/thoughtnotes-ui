@@ -1,5 +1,5 @@
 // focused-header.component.ts
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit, Output, signal} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,8 @@ import { FocusContext } from '../../model/focus-context';
 export class FocusHeaderComponent implements OnInit {
   currentDate: Date = new Date();
   currentWeek: number = 0;
-  location: string = 'Loading...';
+  locationSignal = signal('Loading...');
+  locationInfo = this.locationSignal.asReadonly();
 
   @Input()
   context: FocusContext | undefined;
@@ -28,7 +29,7 @@ export class FocusHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentWeek();
-    this.getUserLocation();
+    this.updateUserLocation();
   }
 
   private readonly ONE_WEEK_MILLISECONDS = 604800000;
@@ -41,19 +42,19 @@ export class FocusHeaderComponent implements OnInit {
     this.currentWeek = Math.ceil(diff / oneWeek);
   }
 
-  getUserLocation(): void {
+  updateUserLocation(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           // For a real app, you might want to use a service to convert coordinates to a place name
-          this.location = `Lat: ${position.coords.latitude.toFixed(2)}, Long: ${position.coords.longitude.toFixed(2)}`;
+          this.locationSignal.set(`Lat: ${position.coords.latitude.toFixed(2)}, Long: ${position.coords.longitude.toFixed(2)}`);
         },
         () => {
-          this.location = 'Location not available';
+          this.locationSignal.set('Location not available');
         }
       );
     } else {
-      this.location = 'Geolocation not supported';
+      this.locationSignal.set( 'Geolocation not supported');
     }
   }
 }
