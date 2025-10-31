@@ -33,7 +33,6 @@ export class TimeBasedViewsComponent implements OnInit {
 
   currentDate: Date = new Date();
   currentWeek: number = 0;
-  location: string = 'Loading...';
 
   ngOnInit() {
     /**
@@ -42,10 +41,8 @@ export class TimeBasedViewsComponent implements OnInit {
      * To handle this, subscribe to ActivatedRoute.params or ActivatedRoute.queryParams in your component.
      * This way, you can react to parameter changes even when the component is reused.
      */
-    this.currentWeek = this.getCurrentWeek();
-    this.location = this.getUserLocation();
-
     this.route.params.subscribe(params => {
+      this.currentWeek = this.getCurrentWeek(); // Refresh CUrrent Week on param change
       // Observable to subscribe to updates --> this.route.snapshot.queryParams
       // Send dataRange to the API using a service and get list to display
       this.dataRange = params['dataRange'];
@@ -65,7 +62,6 @@ export class TimeBasedViewsComponent implements OnInit {
         focusScopeInDays,
         currentWeek: this.currentWeek,
         currentDate: this.currentDate,
-        currentLocation: this.location // Defect with Location should be fixed using Signals
       };
       console.log("this.focusContext ->" + JSON.stringify(this.focusContext));
     });
@@ -77,23 +73,5 @@ export class TimeBasedViewsComponent implements OnInit {
     const diff = now.getTime() - start.getTime();
     const oneWeek = this.ONE_WEEK_MILLISECONDS;
     return Math.ceil(diff / oneWeek);
-  }
-
-  getUserLocation(): string {
-    console.log("Getting user location...");
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          // For a real app, you might want to use a service to convert coordinates to a place name
-          return `Lat: ${position.coords.latitude.toFixed(2)}, Long: ${position.coords.longitude.toFixed(2)}`;
-        },
-        () => {
-          return 'Location not available';
-        }
-      );
-    } else {
-      return 'Geolocation not supported';
-    }
-    return 'Loading...';
   }
 }

@@ -65,6 +65,10 @@ function fetchData(
     } else if (timeZoomLevel === 'daily') {
       let dateString = new Date().toISOString().split('T')[0];
       zoomedData = data.filter(value => value.date === dateString);
+    } else if (timeZoomLevel === 'weekly') {
+      const today = new Date();
+      const lastWeek = getDateFromOneWeekAgo(today);
+      zoomedData = data.filter(value => ((new Date(value.date) >= lastWeek) && (new Date(value.date) <= today)));
     }
     // In a real application, you would aggregate the data based on the timeZoomLevel
     // For example, if timeZoomLevel is 'monthly', you would group the data by month
@@ -74,6 +78,12 @@ function fetchData(
     const result: DataResult<DayNote[]> = { data: zoomedData };
     resolve(result.data);
   });
+}
+
+function getDateFromOneWeekAgo(date: Date) {
+  var today = new Date(date);
+  var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+  return lastWeek;
 }
 
 // GET all day notes
