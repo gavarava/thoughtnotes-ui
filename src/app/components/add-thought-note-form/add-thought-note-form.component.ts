@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ThoughtNote} from '../../model/thoughtnote';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, NgForm} from '@angular/forms';
 import {v4 as uuidv4} from 'uuid';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FocusContext} from '../../model/focus-context';
@@ -16,6 +16,7 @@ import {ThoughtnotesService} from '../../services/thoughtnotes.service';
 @Component({
   selector: 'app-thoughtnote-form',
   templateUrl: './app-thoughtnote-form.component.html',
+  styleUrls: ['./app-thoughtnote-form.component.scss'],
   imports: [FormsModule, MatFormField, MatDatepickerToggle, MatDatepicker, MatDatepickerInput, MatLabel, MatSelect, MatOption, MatInput, MatDialogContent, MatDialogTitle, MatDialogActions, MatButton, MatButton],
   providers: [
     provideNativeDateAdapter()
@@ -26,10 +27,10 @@ export class AddThoughtNoteFormComponent {
   constructor(private thoughtnotesService: ThoughtnotesService, private router: Router) {
   }
 
-  // FIXME: Replace with values from a service
+  // TODO: Replace with values from a service
   tags = ['Meeting', 'Health', 'Finance', 'Workout', 'Project', 'Family', 'Groceries', 'Learning', 'Home', 'Reading', 'Admin', 'Social', 'Coding', 'Travel', 'Other'];
   categories = ['Personal', 'Work', 'Health', 'Finance', 'Education', 'Social', 'Other'];
-  moods = ['Happy', 'Sad', 'Neutral', 'Excited', 'Anxious', 'Angry', 'Relaxed', 'Bored', 'Stressed', 'Content'];
+  moods = ['Happy', 'Sad', 'Neutral', 'Excited', 'Anxious', 'Angry', 'Relaxed', 'Bored', 'Stressed', 'Content', 'todo', 'done'];
 
   thoughtNote: ThoughtNote = {
     UUID: uuidv4(),
@@ -56,15 +57,14 @@ export class AddThoughtNoteFormComponent {
     this.isSideOpen = !this.isSideOpen;
   }
 
-  private navigateToHome(form: any) {
+  private navigateToHome() {
     this.router.navigate(['/']).then(() => {
       console.log("Navigated to home");
-      form.resetForm();
-    })
+    });
   }
 
 
-  onSubmit(form: any) {
+  onSubmit(form: NgForm) {
     console.log("Invoked onSubmit")
     this.thoughtnotesService
       .saveThoughtNote(this.thoughtNote)
@@ -72,7 +72,8 @@ export class AddThoughtNoteFormComponent {
         next: (data) => {
           console.log("Thought Note saved successfully", data);
           this.isVisible = false;
-          this.navigateToHome(form);
+          form.resetForm();
+          this.navigateToHome();
         },
         error: (error) => {
           console.error("Error saving Thought Note", error);
@@ -81,7 +82,7 @@ export class AddThoughtNoteFormComponent {
       });
   }
 
-  onReset(form: any) {
+  onReset(form: NgForm) {
     form.resetForm();
     this.thoughtNote = {
       UUID: uuidv4(),
@@ -96,9 +97,10 @@ export class AddThoughtNoteFormComponent {
     console.log("Invoked Reset");
   }
 
-  onCancel(form: any) {
+  onCancel(form: NgForm) {
     console.log("Invoked Cancel");
     this.isVisible = false;
-    this.navigateToHome(form);
+    form.resetForm();
+    this.navigateToHome();
   }
 }

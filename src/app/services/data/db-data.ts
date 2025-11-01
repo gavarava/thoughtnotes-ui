@@ -1,9 +1,11 @@
-export const THOUGHNOTESCATEGORIES: any = [
+import { ThoughtNote } from "../../model/thoughtnote";
+
+export const THOUGHNOTESCATEGORIES: string[] = [
     "Fitness",
   ]
 ;
 
-export const THOUGHTNOTESLIST: any =
+export const THOUGHTNOTESLIST: ThoughtNote[] =
   [
     {
       "UUID": "a1b2c3d4-e5f6-7890-1234-567890abcdef",

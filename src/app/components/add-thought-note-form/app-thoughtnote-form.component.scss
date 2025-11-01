@@ -1,1 +1,36 @@
 @use '@angular/material' as mat;
+
+.form-container {
+  // Set a max-width for very large screens to keep the form readable
+  max-width: 800px;
+  margin: auto;
+}
+
+.form-content {
+  // Add padding that mat-dialog-content was providing
+  padding: 0 24px;
+}
+
+.form-grid {
+  display: grid;
+  // On smaller screens, default to a single column
+  grid-template-columns: 1fr;
+  gap: 16px; // Space between form fields
+}
+
+// Use a media query to create a two-column layout on screens wider than 600px
+@media (min-width: 600px) {
+  .form-grid {
+    // 1fr 1fr creates two equal-width columns
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.full-width-field {
+  // This class makes an item span across all columns of the grid
+  grid-column: 1 / -1;
+}
+
+.form-actions {
+  margin-top: 16px;
+}

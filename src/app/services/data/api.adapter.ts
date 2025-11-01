@@ -42,11 +42,11 @@ export class ApiDataAdapter implements DataRepositoryPort<ThoughtNote[]> {
       url += `category=${filterCriteria.category}&`;
     }
 
-    if (filterCriteria.category) {
+    if (filterCriteria.tag) {
       url += `tag=${filterCriteria.tag}&`;
     }
 
-    if (filterCriteria.category) {
+    if (filterCriteria.mood) {
       url += `mood=${filterCriteria.mood}&`;
     }
 

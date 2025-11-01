@@ -1,71 +1,79 @@
 <form #thoughtNoteForm="ngForm" (ngSubmit)="onSubmit(thoughtNoteForm)" class="thought-note-form">
   <div class="form-container">
   <h2 mat-dialog-title>Add New Thought Note</h2>
-  <mat-dialog-content>
-    <mat-form-field appearance="fill">
-      <mat-label>Title</mat-label>
-      <input matInput
-             name="title"
-             [(ngModel)]="thoughtNote.title"
-             required>
-    </mat-form-field>
+  <div class="form-content">
+    <div class="form-grid">
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput
+               name="title"
+               [(ngModel)]="thoughtNote.title"
+               required>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Description</mat-label>
-      <textarea matInput
-                name="description"
-                [(ngModel)]="thoughtNote.description"
-                rows="4"
-                required></textarea>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Date</mat-label>
+        <input matInput
+               [matDatepicker]="picker"
+               name="date"
+               [(ngModel)]="thoughtNote.date"
+               required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Category</mat-label>
-      <mat-select name="category"
-                  [(ngModel)]="thoughtNote.category"
-                  required>
-        <mat-option value="Work">Work</mat-option>
-        <mat-option value="Personal">Personal</mat-option>
-        <mat-option value="Ideas">Ideas</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select name="category"
+                    [(ngModel)]="thoughtNote.category"
+                    required>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Tag</mat-label>
-      <mat-select name="tag"
-                  [(ngModel)]="thoughtNote.tag"
-                  required>
-        <mat-option value="Meeting">Meeting</mat-option>
-        <mat-option value="Health">Health</mat-option>
-        <mat-option value="Finance">Finance</mat-option>
-        <mat-option value="Project">Project</mat-option>
-        <mat-option value="Family">Family</mat-option>
-        <mat-option value="Learning">Learning</mat-option>
-      </mat-select>
-    </mat-form-field>
+          @for (category of categories; track category) {
+            <mat-option [value]="category">
+              {{ category }}
+            </mat-option>
+          }
 
-    <mat-form-field appearance="fill">
-      <mat-label>Mood</mat-label>
-      <mat-select name="mood"
-                  [(ngModel)]="thoughtNote.mood"
-                  required>
-        <mat-option value="Happy">😊 Happy</mat-option>
-        <mat-option value="Neutral">😐 Neutral</mat-option>
-        <mat-option value="Sad">😢 Sad</mat-option>
-      </mat-select>
-    </mat-form-field>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Date</mat-label>
-      <input matInput
-             [matDatepicker]="picker"
-             name="date"
-             [(ngModel)]="thoughtNote.date"
-             required>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Tag</mat-label>
+        <mat-select name="tag"
+                    [(ngModel)]="thoughtNote.tag"
+                    required>
+          @for (tag of tags; track tag) {
+            <mat-option [value]="tag">
+              {{ tag }}
+            </mat-option>
+          }
+
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Mood</mat-label>
+        <mat-select name="mood"
+                    [(ngModel)]="thoughtNote.mood"
+                    required>
+          @for (mood of moods; track mood) {
+            <mat-option [value]="mood">
+              {{ mood }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width-field">
+        <mat-label>Description</mat-label>
+        <textarea matInput
+                  name="description"
+                  [(ngModel)]="thoughtNote.description"
+                  rows="4"
+                  required></textarea>
+      </mat-form-field>
+    </div>
+  </div>
   <mat-dialog-actions align="end" class="form-actions">
     <button mat-flat-button type="submit" [disabled]="!thoughtNoteForm.form.valid">
       Save
