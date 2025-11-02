@@ -5,6 +5,6 @@ export interface ThoughtNote {
     tag: string;
     title: string;
     description: string;
-    date: string;
+    dueDate: string;
     mood: string;
   }

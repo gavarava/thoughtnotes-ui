@@ -17,6 +17,7 @@ app.use(cors());
 let dayNotes: DayNote[] = initDayNotesFromJson('./data.json');
 
 function extractDateString(date: String, parts: Array<'year' | 'month' | 'day'>): string {
+  console.log(date);
   const iso = date.split('T')[0]; // "YYYY-MM-DD"
   const [year, month, day] = iso.split('-');
   const map = { year, month, day };
@@ -61,14 +62,21 @@ function fetchData(
     let zoomedData: DayNote[] = [];
     if (timeZoomLevel === 'monthly') {
       let monthString = extractDateString(new Date().toISOString(), ['year', 'month']); // e\.g\., "2023-10"
-      zoomedData = data.filter(value => extractDateString(value.date, ['year', 'month']) === monthString);
+      zoomedData = data.filter(value => {
+        console.log("value" + JSON.stringify(value));
+        let checkvale = value.dueDate;
+        console.log("checkvale" + checkvale);
+        let extd = extractDateString(checkvale, ['year', 'month']);
+        console.log("extd="+extd);
+        return extd === monthString;
+      });
     } else if (timeZoomLevel === 'daily') {
       let dateString = new Date().toISOString().split('T')[0];
-      zoomedData = data.filter(value => value.date === dateString);
+      zoomedData = data.filter(value => value.dueDate === dateString);
     } else if (timeZoomLevel === 'weekly') {
       const today = new Date();
       const lastWeek = getDateFromOneWeekAgo(today);
-      zoomedData = data.filter(value => ((new Date(value.date) >= lastWeek) && (new Date(value.date) <= today)));
+      zoomedData = data.filter(value => ((new Date(value.dueDate) >= lastWeek) && (new Date(value.dueDate) <= today)));
     }
     // In a real application, you would aggregate the data based on the timeZoomLevel
     // For example, if timeZoomLevel is 'monthly', you would group the data by month

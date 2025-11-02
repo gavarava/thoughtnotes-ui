@@ -11,9 +11,9 @@
                required>
       </mat-form-field>
 
-    <mat-form-field appearance="fill">
+       <mat-form-field appearance="fill">
       <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="thoughtNote.date" required>
+      <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="thoughtNote.dueDate" required>
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -51,8 +51,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Mood</mat-label>
         <mat-select name="mood"
-                    [(ngModel)]="thoughtNote.mood"
-                    required>
+                    [(ngModel)]="thoughtNote.mood">
           @for (mood of moods; track mood) {
             <mat-option [value]="mood">
               {{ mood }}
@@ -66,8 +65,7 @@
         <textarea matInput
                   name="description"
                   [(ngModel)]="thoughtNote.description"
-                  rows="4"
-                  required></textarea>
+                  rows="4"></textarea>
       </mat-form-field>
     </div>
     </div>
@@ -84,3 +82,4 @@
   </div>
   </div>
 </form>
+<p>title: {{ thoughtNoteForm.form.value  | json }}</p>

@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {ThoughtNote} from '../../model/thoughtnote';
-import {FormsModule, NgForm} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators} from '@angular/forms';
 import {v4 as uuidv4} from 'uuid';
 import {Router} from '@angular/router';
 import {FocusContext} from '../../model/focus-context';
@@ -17,16 +16,17 @@ import {MatButtonModule} from '@angular/material/button';
 import {JsonPipe} from '@angular/common';
 
 @Component({
-  selector: 'app-thoughtnote-form',
-  templateUrl: './app-thoughtnote-form.component.html',
-  styleUrls: ['./app-thoughtnote-form.component.scss'],
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModule, MatButtonModule, MatDialogModule, JsonPipe],
+  selector: 'app-thoughtnote-form-rx',
+  templateUrl: './add-thought-note-form-rx.component.html',
+  styleUrls: ['./add-thought-note-form-rx.component.scss'],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModule, MatButtonModule, MatDialogModule, ReactiveFormsModule, JsonPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     provideNativeDateAdapter()
   ],
+  standalone: true
 })
-export class AddThoughtNoteFormComponent {
+export class AddThoughtNoteFormRxComponent {
 
   constructor(private thoughtnotesService: ThoughtnotesService, private router: Router) {
   }
@@ -36,16 +36,23 @@ export class AddThoughtNoteFormComponent {
   categories = ['Personal', 'Work', 'Health', 'Finance', 'Education', 'Social', 'Other'];
   moods = ['Happy', 'Sad', 'Neutral', 'Excited', 'Anxious', 'Angry', 'Relaxed', 'Bored', 'Stressed', 'Content', 'todo', 'done'];
 
-  thoughtNote: ThoughtNote = {
-    UUID: uuidv4(),
-    timestamp: Date.now(),
-    category: '',
-    tag: '',
-    title: '',
-    description: '',
-    dueDate: new Date().toISOString().substring(0, 10),
-    mood: ''
-  };
+  title: FormControl = new FormControl('', [Validators.required]);
+  category: FormControl = new FormControl('', [Validators.required]);
+
+  tag: FormControl = new FormControl('', [Validators.required]);
+  date: FormControl = new FormControl('', [Validators.required]);
+
+  mood: FormControl = new FormControl('', []);
+  description: FormControl = new FormControl('', []);
+
+  addThoughtNoteForm: FormGroup = new FormGroup({
+    title: this.title,
+    category: this.category,
+    tag: this.tag,
+    date: this.date,
+    mood: this.mood,
+    description: this.description
+  });
 
   @Input({required: true})
   context: FocusContext | undefined;
@@ -68,15 +75,24 @@ export class AddThoughtNoteFormComponent {
   }
 
 
-  onSubmit(form: NgForm) {
+  onSubmit() {
     console.log("Invoked onSubmit")
     this.thoughtnotesService
-      .saveThoughtNote(this.thoughtNote)
+      .saveThoughtNote({
+        UUID: uuidv4(),
+        timestamp: Date.now(),
+        category: this.category.value,
+        tag: this.tag.value,
+        title: this.title.value,
+        description: this.description.value,
+        dueDate: this.date.value,
+        mood: this.mood.value
+      })
       .subscribe({
         next: (data) => {
           console.log("Thought Note saved successfully", data);
           this.isVisible = false;
-          form.resetForm();
+          this.addThoughtNoteForm.reset();
           this.navigateToHome();
         },
         error: (error) => {
@@ -86,25 +102,15 @@ export class AddThoughtNoteFormComponent {
       });
   }
 
-  onReset(form: NgForm) {
-    form.resetForm();
-    this.thoughtNote = {
-      UUID: uuidv4(),
-      timestamp: Date.now(),
-      category: '',
-      tag: '',
-      title: '',
-      description: '',
-      dueDate: new Date().toISOString().substring(0, 10),
-      mood: ''
-    };
+  onReset() {
+    this.addThoughtNoteForm.reset();
     console.log("Invoked Reset");
   }
 
-  onCancel(form: NgForm) {
+  onCancel() {
     console.log("Invoked Cancel");
     this.isVisible = false;
-    form.resetForm();
+    this.addThoughtNoteForm.reset();
     this.navigateToHome();
   }
 }
