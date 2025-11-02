@@ -7,6 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
   selector: 'app-thoughtnote',
   imports: [CommonModule, MatIconModule],
   templateUrl: './thoughtnote.component.html',
+  standalone: true,
   styleUrl: './thoughtnote.component.scss'
 })
 export class ThoughtnoteComponent {

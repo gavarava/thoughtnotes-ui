@@ -1,8 +1,8 @@
 <form #thoughtNoteForm="ngForm" (ngSubmit)="onSubmit(thoughtNoteForm)" class="thought-note-form">
   <div class="form-container">
-  <h2 mat-dialog-title>Add New Thought Note</h2>
-  <div class="form-content">
-    <div class="form-grid">
+    <h2 mat-dialog-title>Add New Thought Note</h2>
+    <div class="form-content">
+      <div class="form-grid">
       <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
         <input matInput
@@ -11,16 +11,13 @@
                required>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Date</mat-label>
-        <input matInput
-               [matDatepicker]="picker"
-               name="date"
-               [(ngModel)]="thoughtNote.date"
-               required>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="thoughtNote.date" required>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Category</mat-label>
@@ -73,8 +70,8 @@
                   required></textarea>
       </mat-form-field>
     </div>
-  </div>
-  <mat-dialog-actions align="end" class="form-actions">
+    </div>
+  <div class="form-actions">
     <button mat-flat-button type="submit" [disabled]="!thoughtNoteForm.form.valid">
       Save
     </button>
@@ -84,6 +81,6 @@
     <button mat-raised-button type="button" (click)="onCancel(thoughtNoteForm)">
       Cancel
     </button>
-  </mat-dialog-actions>
+  </div>
   </div>
 </form>

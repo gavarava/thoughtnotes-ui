@@ -9,6 +9,7 @@ import { FocusContext } from '../../model/focus-context';
   selector: 'app-focus-header',
   templateUrl: './focus-header.component.html',
   styleUrls: ['./focus-header.component.scss'],
+  standalone: true,
   imports: [MatToolbarModule, CommonModule, MatIconModule]
 })
 export class FocusHeaderComponent implements OnInit {

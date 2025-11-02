@@ -21,7 +21,9 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
     CommonModule,
     FocusHeaderComponent, RouterLink, RouterLinkActive],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'})
+  standalone: true,
+  styleUrl: './dashboard.component.scss'
+})
 export class DashboardComponent implements OnInit {
 
   @Input({ required: true })

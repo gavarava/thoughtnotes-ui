@@ -1,7 +1,7 @@
-import express, { Request, Response } from 'express';
-import { v4 as uuidv4 } from 'uuid';
+import express, {Request, Response} from 'express';
+import {v4 as uuidv4} from 'uuid';
 import cors from 'cors';
-import { DayNote } from './daynote';
+import {DayNote} from './daynote';
 import {initDayNotesFromJson} from './init';
 import {DataResult, FilterCriteria, SortOptions, TimeZoomLevel} from './data/data.model';
 
@@ -81,9 +81,8 @@ function fetchData(
 }
 
 function getDateFromOneWeekAgo(date: Date) {
-  var today = new Date(date);
-  var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
-  return lastWeek;
+  const today = new Date(date);
+  return new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
 }
 
 // GET all day notes
