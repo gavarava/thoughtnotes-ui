@@ -17,3 +17,19 @@ html {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.highlight-red {
+  border: 6px solid #f44336;
+  padding: 10px;
+}
+
+.highlight-yellow {
+  border: 6px solid #ffeb3b;
+  padding: 10px;
+}
+
+.highlight-green {
+  border: 6px solid #4CAF50;
+  padding: 10px;
+}

@@ -2,15 +2,19 @@ import { Component, Input } from '@angular/core';
 import { ThoughtNote } from '../../model/thoughtnote';
 import { CommonModule } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
+import {HighlightColor, HighlightedDirective} from '../../directives/highlighted.directive';
 
 @Component({
   selector: 'app-thoughtnote',
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, HighlightedDirective],
   templateUrl: './thoughtnote.component.html',
   standalone: true,
   styleUrl: './thoughtnote.component.scss'
 })
 export class ThoughtnoteComponent {
+
+  @Input()
+  highlightWith!: HighlightColor;
 
   @Input({ required: true })
   thoughtnote!: ThoughtNote;

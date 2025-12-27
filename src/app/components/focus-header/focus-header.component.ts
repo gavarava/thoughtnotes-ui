@@ -1,5 +1,5 @@
 // focused-header.component.ts
-import {Component, Input, OnInit, Output, signal} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, signal} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -12,28 +12,30 @@ import { FocusContext } from '../../model/focus-context';
   standalone: true,
   imports: [MatToolbarModule, CommonModule, MatIconModule]
 })
-export class FocusHeaderComponent implements OnInit {
+export class FocusHeaderComponent implements OnInit, OnDestroy {
+
+  private readonly ONE_WEEK_MILLISECONDS = 604800000; // 7 * 24 * 60 * 60 * 1000
+
   currentDate: Date = new Date();
   currentWeek: number = 0;
   locationSignal = signal('Loading...');
+
   locationInfo = this.locationSignal.asReadonly();
 
-  @Input()
-  context: FocusContext | undefined;
+  @Input() context!: FocusContext | undefined;
 
   constructor() {
-    // Update time every second
-    setInterval(() => {
-      this.currentDate = new Date();
-    }, 1000);
+    // Constructor is best kept simple. We'll initialize in ngOnInit.
   }
 
   ngOnInit(): void {
-    this.getCurrentWeek();
+    // Get the location once when the component loads.
     this.updateUserLocation();
   }
 
-  private readonly ONE_WEEK_MILLISECONDS = 604800000;
+  ngOnDestroy(): void {
+    // Important: Clean up the interval to prevent memory leaks.
+  }
 
   getCurrentWeek(): void {
     const now = new Date();

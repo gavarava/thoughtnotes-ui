@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, signal} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -26,6 +26,8 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  contextSignal = signal<FocusContext | undefined>(undefined);
+
   @Input({ required: true })
   dataRange: string | undefined;
 
@@ -33,7 +35,13 @@ export class DashboardComponent implements OnInit {
   thoughtNotes!: ThoughtNote[];
 
   @Input({ required: true })
-  context: FocusContext | undefined;
+  set context(value: any) {
+    console.log("Setting context in DashboardComponent");
+    if (value === undefined) {
+      throw new Error('FocusContext cannot be undefined');
+    }
+    this.contextSignal.set(value);
+  }
 
   isSideOpen = true;
 

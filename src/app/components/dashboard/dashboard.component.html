@@ -99,12 +99,13 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content class="sidenav-content">
-    <app-focus-header [context]="context"></app-focus-header>
+    <app-focus-header [context]="contextSignal()"></app-focus-header>
     <!--*ngFor="let eachthoughtnote of thoughtNotes$ | async;"-->
     @if (thoughtNotes) {
       <!--Benefits of using async pipe is that the Observable is unsubscribed automatically when the component is destroyed-->
       @for (eachthoughtnote of thoughtNotes; track eachthoughtnote.UUID) {
         <app-thoughtnote [thoughtnote]="eachthoughtnote"></app-thoughtnote>
+        <!--app-thoughtnote [thoughtnote]="eachthoughtnote" highlightWith="red"></app-thoughtnote DEMO of Directive-->
       }
     } @else {
       <div class="no-thoughtnotes-message">
