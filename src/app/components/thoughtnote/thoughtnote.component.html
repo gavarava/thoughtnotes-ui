@@ -9,6 +9,7 @@
       <div class="thoughtnote-description" [innerHTML]="thoughtnote.description"></div>
 
       <div class="thoughtnote-metadata">
+        <mat-checkbox value="{{ isSelected }}" (change)="isSelected = !isSelected; doOnThoughtnoteSelected()"></mat-checkbox>
         <div class="thoughtnote-date">
           <span class="label">Due Date:</span>
           <span>{{ thoughtnote.dueDate | date:'medium' }}</span>

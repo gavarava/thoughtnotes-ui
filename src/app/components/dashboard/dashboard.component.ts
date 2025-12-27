@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, signal} from '@angular/core';
+import {Component, computed, Input, OnInit, signal} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -10,6 +10,7 @@ import {Observable, of} from 'rxjs';
 import {ThoughtNote} from '../../model/thoughtnote';
 import {FocusContext} from '../../model/focus-context';
 import {RouterLink, RouterLinkActive} from '@angular/router';
+import {ThoughtnotesService} from '../../services/thoughtnotes.service';
 
 @Component({
   selector: 'thoughtnotes-dashboard',
@@ -26,7 +27,13 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  constructor(private thoughtNotesService: ThoughtnotesService) {
+  }
+
   contextSignal = signal<FocusContext | undefined>(undefined);
+
+  selectedThoughtNotes = signal<Array<any>>([]);
+  hasSelectedNotes = computed(() => this.selectedThoughtNotes().length > 0);
 
   @Input({ required: true })
   dataRange: string | undefined;
@@ -47,6 +54,27 @@ export class DashboardComponent implements OnInit {
 
   onSideNavToggled() {
     this.isSideOpen = !this.isSideOpen;
+  }
+
+  onThoughtnoteSelected(event: any) {
+    console.log('ThoughtnoteSelected', event);
+    if (event.selected) {
+    this.selectedThoughtNotes.update(value => value.concat(event.uuid));
+    } else {
+      this.selectedThoughtNotes.update(value => value.filter(uuid => uuid !== event.uuid));
+    }
+    console.log('Updated array -', this.selectedThoughtNotes());
+  }
+
+  deleteSelectedNotes() {
+    const notesToDelete = this.selectedThoughtNotes();
+    console.log('Deleting notes:', notesToDelete);
+    if (notesToDelete.length > 0) {
+      notesToDelete.forEach((selectedNoteId: any) => {
+        this.thoughtNotesService.deleteThoughtNote(selectedNoteId);
+      })
+    }
+    this.selectedThoughtNotes.set([]);
   }
 
   thoughtnotesList$!: Observable<ThoughtNote[]>;

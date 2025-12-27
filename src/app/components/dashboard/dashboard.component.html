@@ -82,7 +82,7 @@
               <mat-icon>add</mat-icon>
               <span class="text">Add</span>
             </button>
-            <button class="sidebar-button">
+            <button class="sidebar-button" (click)="deleteSelectedNotes()">
               <mat-icon>delete</mat-icon>
               <span class="text">Delete</span>
             </button>
@@ -104,7 +104,7 @@
     @if (thoughtNotes) {
       <!--Benefits of using async pipe is that the Observable is unsubscribed automatically when the component is destroyed-->
       @for (eachthoughtnote of thoughtNotes; track eachthoughtnote.UUID) {
-        <app-thoughtnote [thoughtnote]="eachthoughtnote"></app-thoughtnote>
+        <app-thoughtnote [thoughtnote]="eachthoughtnote" (selectedThoughtnoteIdEmitter)="onThoughtnoteSelected($event)" ></app-thoughtnote>
         <!--app-thoughtnote [thoughtnote]="eachthoughtnote" highlightWith="red"></app-thoughtnote DEMO of Directive-->
       }
     } @else {

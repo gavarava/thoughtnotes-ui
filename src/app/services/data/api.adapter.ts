@@ -28,6 +28,11 @@ export class ApiDataAdapter implements DataRepositoryPort<ThoughtNote[]> {
     return this.http.post<ThoughtNote>(this.apiUrl, data);
   }
 
+  deleteData(id: string):void {
+    console.log('deleteData called with id: ' + id);
+    //this.http.delete<ThoughtNote>(this.apiUrl + '/thoughtnote/' + id);
+  }
+
   private buildApiUrl(
     filterCriteria: FilterCriteria,
     sortOptions: SortOptions,

@@ -37,6 +37,10 @@ export class ThoughtnotesService {
     return this.apiDataAdapter.saveData(note);
   }
 
+  deleteThoughtNote(thoughtNoteUuid: string): void {
+    this.apiDataAdapter.deleteData(thoughtNoteUuid);
+  }
+
   private sort(notes: ThoughtNote[], sortParam: string, sortDirection: "asc" | "desc") {
     notes.sort((a, b) => {
       const valueA = a[sortParam as keyof ThoughtNote];
