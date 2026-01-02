@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import {HighlightColor, HighlightedDirective} from '../../directives/highlighted.directive';
 import {MatCheckbox} from '@angular/material/checkbox';
+import {MoodToEmojiPipe} from '../../pipes/mood-to-emoji.pipe';
 
 @Component({
   selector: 'app-thoughtnote',
-  imports: [CommonModule, MatIconModule, HighlightedDirective, MatCheckbox],
+  imports: [CommonModule, MatIconModule, HighlightedDirective, MatCheckbox, MoodToEmojiPipe],
   templateUrl: './thoughtnote.component.html',
   standalone: true,
   styleUrl: './thoughtnote.component.scss'

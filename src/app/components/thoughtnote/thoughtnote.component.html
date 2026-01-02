@@ -17,7 +17,7 @@
 
         <div class="thoughtnote-mood">
           <span class="label">Status:</span>
-          <span>{{ thoughtnote.mood }}</span>
+          <span>{{ thoughtnote.mood | moodToEmoji }} {{ thoughtnote.mood }}</span>
         </div>
       </div>
     </div>
