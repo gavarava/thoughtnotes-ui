@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ThoughtNote} from '../model/thoughtnote';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {ApiDataAdapter} from './data/api.adapter';
+import {Observable, Subject} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
+import {LocalStorageAdapter} from './data/local-storage.adapter';
 import {TimeZoomLevel} from './data/data.model';
 
 @Injectable({
@@ -10,11 +10,17 @@ import {TimeZoomLevel} from './data/data.model';
 })
 export class ThoughtnotesService {
 
-  constructor(private apiDataAdapter: ApiDataAdapter) {
+  private _refreshNeeded$ = new Subject<void>();
+
+  get refreshNeeded$() {
+    return this._refreshNeeded$.asObservable();
+  }
+
+  constructor(private dataAdapter: LocalStorageAdapter) {
   }
 
   loadThoughtNotes(category='*', tag='*', mood='*', sortParam='timestamp', sortDirection: 'asc' | 'desc' = 'asc', timeZoomLevel: TimeZoomLevel): Observable<ThoughtNote[]> {
-    return this.apiDataAdapter.getData({category: category, tag:tag, mood:mood}, {sortBy: sortParam, sortOrder: sortDirection}, timeZoomLevel)
+    return this.dataAdapter.getData({category: category, tag:tag, mood:mood}, {sortBy: sortParam, sortOrder: sortDirection}, timeZoomLevel)
       .pipe(
         map(response => {
           // Extract the data
@@ -34,11 +40,19 @@ export class ThoughtnotesService {
   }
 
   saveThoughtNote(note: ThoughtNote): Observable<ThoughtNote> {
-    return this.apiDataAdapter.saveData(note);
+    return this.dataAdapter.saveData(note).pipe(
+      tap(() => {
+        this._refreshNeeded$.next();
+      })
+    );
   }
 
-  deleteThoughtNote(thoughtNoteUuid: string): void {
-    this.apiDataAdapter.deleteData(thoughtNoteUuid);
+  deleteThoughtNote(thoughtNoteUuid: string): Observable<void> {
+    return this.dataAdapter.deleteData(thoughtNoteUuid).pipe(
+      tap(() => {
+        this._refreshNeeded$.next();
+      })
+    );
   }
 
   private sort(notes: ThoughtNote[], sortParam: string, sortDirection: "asc" | "desc") {

@@ -42,10 +42,19 @@ export class TimeBasedViewsComponent implements OnInit {
      * This way, you can react to parameter changes even when the component is reused.
      */
     this.route.params.subscribe(params => {
+      this.loadData(params['dataRange']);
+    });
+
+    this.service.refreshNeeded$.subscribe(() => {
+      this.loadData(this.dataRange);
+    });
+  }
+
+  loadData(dataRange: "daily" | "weekly" | "monthly" | "yearly") {
       this.currentWeek = this.getCurrentWeek(); // Refresh CUrrent Week on param change
       // Observable to subscribe to updates --> this.route.snapshot.queryParams
       // Send dataRange to the API using a service and get list to display
-      this.dataRange = params['dataRange'];
+      this.dataRange = dataRange;
       console.log("Latest dataRange ->" + this.dataRange);
       this.thoughtNotes$ = this.service.loadThoughtNotes('*', '*', '*', 'timestamp', 'desc', this.dataRange);
 
@@ -64,7 +73,6 @@ export class TimeBasedViewsComponent implements OnInit {
         currentDate: this.currentDate,
       };
       console.log("this.focusContext ->" + JSON.stringify(this.focusContext));
-    });
   }
 
   getCurrentWeek(): number {

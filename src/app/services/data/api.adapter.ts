@@ -10,7 +10,7 @@ import {ThoughtNote} from '../../model/thoughtnote';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiDataAdapter implements DataRepositoryPort<ThoughtNote[]> {
+export class ApiDataAdapter implements DataRepositoryPort<ThoughtNote> {
   private apiUrl = "http://localhost:9000/api/daynotes" // TODO fix api url from environment, can we use localstorage?
   constructor(private http: HttpClient) {}
 
@@ -28,9 +28,9 @@ export class ApiDataAdapter implements DataRepositoryPort<ThoughtNote[]> {
     return this.http.post<ThoughtNote>(this.apiUrl, data);
   }
 
-  deleteData(id: string):void {
+  deleteData(id: string): Observable<void> {
     console.log('deleteData called with id: ' + id);
-    //this.http.delete<ThoughtNote>(this.apiUrl + '/thoughtnote/' + id);
+    return this.http.delete<void>(this.apiUrl + '/thoughtnote/' + id);
   }
 
   private buildApiUrl(

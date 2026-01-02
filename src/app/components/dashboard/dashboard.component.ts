@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
     console.log('Deleting notes:', notesToDelete);
     if (notesToDelete.length > 0) {
       notesToDelete.forEach((selectedNoteId: any) => {
-        this.thoughtNotesService.deleteThoughtNote(selectedNoteId);
+        this.thoughtNotesService.deleteThoughtNote(selectedNoteId).subscribe();
       })
     }
     this.selectedThoughtNotes.set([]);
@@ -81,5 +81,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.thoughtnotesList$ = of(this.thoughtNotes);
+    this.thoughtNotesService.refreshNeeded$.subscribe(() => {
+       // We need to reload the data. Since the data is passed as input,
+       // we might need to trigger a reload in the parent or handle it here if we change strategy.
+       // However, since this component receives data via Input, the parent (TimeBasedViewsComponent)
+       // is responsible for fetching data.
+       // BUT, the service now has a refreshNeeded subject.
+       // Let's see how TimeBasedViewsComponent handles data.
+    });
   }
 }
