@@ -1,0 +1,14 @@
+<!-- D:/development/thoughtnotes-ui/src/app/components/mood-selector/mood-selector.component.html -->
+<div class="mood-container" [class.disabled]="isDisabled">
+  @for (mood of moods; track mood) {
+    <div
+      class="mood-item"
+      [class.selected]="value === mood"
+      (click)="selectMood(mood)"
+      tabindex="0"
+      (keydown.enter)="selectMood(mood)">
+      <span class="emoji">{{ mood | moodToEmoji }}</span>
+      <span class="label">{{ mood }}</span>
+    </div>
+  }
+</div>

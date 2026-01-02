@@ -14,12 +14,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {JsonPipe} from '@angular/common';
+import {MoodSelectorComponent} from '../mood-selector/mood-selector.component';
 
 @Component({
   selector: 'app-thoughtnote-form-rx',
   templateUrl: './add-thought-note-form-rx.component.html',
   styleUrls: ['./add-thought-note-form-rx.component.scss'],
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModule, MatButtonModule, MatDialogModule, ReactiveFormsModule, JsonPipe],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatSelectModule, MatButtonModule, MatDialogModule, ReactiveFormsModule, JsonPipe, MoodSelectorComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     provideNativeDateAdapter()

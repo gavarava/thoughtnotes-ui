@@ -41,16 +41,10 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Mood</mat-label>
-          <mat-select [formControl]="mood">
-            @for (mood of moods; track mood) {
-              <mat-option [value]="mood">
-                {{ mood }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
+        <div class="full-width-field">
+          <label class="custom-label">How are you feeling?</label>
+          <app-mood-selector [formControl]="mood" [moods]="moods"></app-mood-selector>
+        </div>
 
         <mat-form-field appearance="fill" class="full-width-field">
           <mat-label>Description</mat-label>
