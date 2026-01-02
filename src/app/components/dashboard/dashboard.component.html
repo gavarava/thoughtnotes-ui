@@ -82,9 +82,13 @@
               <mat-icon>add</mat-icon>
               <span class="text">Add</span>
             </button>
-            <button class="sidebar-button" (click)="deleteSelectedNotes()">
+            <button class="sidebar-button" [matTooltip]="'Delete selected note/s'" (click)="deleteSelectedNotes()" [disabled]="selectedThoughtNotes().length === 0" [ngClass]="{ 'disabled': selectedThoughtNotes().length === 0 }">
               <mat-icon>delete</mat-icon>
               <span class="text">Delete</span>
+            </button>
+            <button class="sidebar-button" [matTooltip]="'Export selected note/s'" (click)="exportSelectedNotes()" [disabled]="selectedThoughtNotes().length === 0" [ngClass]="{ 'disabled': selectedThoughtNotes().length === 0 }">
+              <mat-icon>download</mat-icon>
+              <span class="text">Export</span>
             </button>
             <button class="sidebar-button">
               <mat-icon>zoom_in</mat-icon>
@@ -114,4 +118,3 @@
     }
   </mat-sidenav-content>
 </mat-sidenav-container>
-

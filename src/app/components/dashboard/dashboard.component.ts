@@ -11,6 +11,7 @@ import {ThoughtNote} from '../../model/thoughtnote';
 import {FocusContext} from '../../model/focus-context';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {ThoughtnotesService} from '../../services/thoughtnotes.service';
+import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({
   selector: 'thoughtnotes-dashboard',
@@ -20,7 +21,7 @@ import {ThoughtnotesService} from '../../services/thoughtnotes.service';
     MatSidenavModule,
     ThoughtnoteComponent,
     CommonModule,
-    FocusHeaderComponent, RouterLink, RouterLinkActive],
+    FocusHeaderComponent, RouterLink, RouterLinkActive, MatTooltip],
   templateUrl: './dashboard.component.html',
   standalone: true,
   styleUrl: './dashboard.component.scss'
@@ -75,6 +76,27 @@ export class DashboardComponent implements OnInit {
       })
     }
     this.selectedThoughtNotes.set([]);
+  }
+
+  exportSelectedNotes() {
+    const selectedIds = this.selectedThoughtNotes();
+    if (selectedIds.length === 0) {
+      console.log('No notes selected for export');
+      return;
+    }
+
+    const notesToExport = this.thoughtNotes.filter(note => selectedIds.includes(note.UUID));
+    const jsonString = JSON.stringify(notesToExport, null, 2);
+
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `thoughtnotes_export_${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+
+    window.URL.revokeObjectURL(url);
   }
 
   thoughtnotesList$!: Observable<ThoughtNote[]>;
