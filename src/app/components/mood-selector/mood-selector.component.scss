@@ -1,10 +1,26 @@
-// D:/development/thoughtnotes-ui/src/app/components/mood-selector/mood-selector.component.scss
 .mood-container {
+  /* CONCEPT 1: The Flex Container */
+  /* This enables Flexbox behavior for direct children (.mood-item) */
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 8px 0;
 
+  /* CONCEPT 2: Wrapping */
+  /* 'wrap' allows items to flow onto multiple lines. */
+  /* Without this, they would squash onto a single line. */
+  flex-wrap: wrap;
+
+  /* CONCEPT 3: Main Axis Alignment */
+  /* 'center' packs all items in the middle of the container. */
+  /* Try changing this to 'space-between' or 'flex-start' to see the difference. */
+  justify-content: center;
+
+  /* CONCEPT 4: Gap */
+  /* Creates consistent spacing between rows and columns. */
+  /* Much cleaner than using margins on individual items. */
+  gap: 16px;
+
+  padding: 16px;
+
+  /* State styling */
   &.disabled {
     opacity: 0.5;
     pointer-events: none;
@@ -12,40 +28,33 @@
 }
 
 .mood-item {
+  /* CONCEPT 5: Nested Flexbox */
+  /* A flex item can also be a flex container! */
   display: flex;
+
+  /* CONCEPT 6: Direction */
+  /* 'column' changes the main axis to vertical. */
+  /* This stacks the Emoji (top) and Label (bottom). */
   flex-direction: column;
+
+  /* CONCEPT 7: Cross Axis Alignment */
+  /* Since direction is column, the cross axis is horizontal. */
+  /* This centers the text and emoji horizontally within the card. */
   align-items: center;
-  justify-content: center;
+
+  /* Visual Styling */
+  width: 80px;
+  padding: 12px;
   border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  width: 60px;
-  height: 60px;
   transition: all 0.2s ease;
   background-color: white;
 
-  &:hover {
-    border-color: #bbdefb; // Light blue
-    background-color: #f5f9ff;
-  }
-
+  /* Interactive states */
   &.selected {
-    border-color: #2196f3; // Primary blue
-    background-color: #e3f2fd;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-
-  .emoji {
-    font-size: 1.5rem;
-    margin-bottom: 4px;
-  }
-
-  .label {
-    font-size: 0.65rem;
-    color: #666;
-    text-transform: uppercase;
-    font-weight: 500;
+    border-color: #3f51b5; /* Primary color */
+    background-color: #e8eaf6; /* Light primary background */
+    transform: translateY(-2px); /* Subtle lift effect */
   }
 }
