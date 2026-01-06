@@ -1,9 +1,10 @@
 // focused-header.component.ts
-import {Component, Input, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, Input, OnInit, signal} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
-import { FocusContext } from '../../model/focus-context';
+import {CommonModule} from '@angular/common';
+import {FocusContext} from '../../model/focus-context';
+import {CachedLocationService} from '../../services/cached-location.service';
 
 @Component({
   selector: 'app-focus-header',
@@ -12,29 +13,27 @@ import { FocusContext } from '../../model/focus-context';
   standalone: true,
   imports: [MatToolbarModule, CommonModule, MatIconModule]
 })
-export class FocusHeaderComponent implements OnInit, OnDestroy {
+export class FocusHeaderComponent implements OnInit {
 
   private readonly ONE_WEEK_MILLISECONDS = 604800000; // 7 * 24 * 60 * 60 * 1000
 
   currentDate: Date = new Date();
   currentWeek: number = 0;
-  locationSignal = signal('Loading...');
+
+  private readonly DEFAULT_VALUE = 'Loading...';
+  locationSignal = signal(this.DEFAULT_VALUE);
 
   locationInfo = this.locationSignal.asReadonly();
 
   @Input() context!: FocusContext | undefined;
 
-  constructor() {
-    // Constructor is best kept simple. We'll initialize in ngOnInit.
+  constructor(private locationService: CachedLocationService) {
   }
 
   ngOnInit(): void {
     // Get the location once when the component loads.
+    this.getCurrentWeek();
     this.updateUserLocation();
-  }
-
-  ngOnDestroy(): void {
-    // Important: Clean up the interval to prevent memory leaks.
   }
 
   getCurrentWeek(): void {
@@ -46,18 +45,8 @@ export class FocusHeaderComponent implements OnInit, OnDestroy {
   }
 
   updateUserLocation(): void {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          // For a real app, you might want to use a service to convert coordinates to a place name
-          this.locationSignal.set(`Lat: ${position.coords.latitude.toFixed(2)}, Long: ${position.coords.longitude.toFixed(2)}`);
-        },
-        () => {
-          this.locationSignal.set('Location not available');
-        }
-      );
-    } else {
-      this.locationSignal.set( 'Geolocation not supported');
-    }
+    this.locationService.getLocation().subscribe((location) => {
+      this.locationSignal.set(location);
+    });
   }
 }
